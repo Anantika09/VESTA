@@ -1,0 +1,51 @@
+/* VESTA GLOBAL - NETFLIX PROFESSIONAL */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Manrope:wght@300;400;500;600;700;800&display=swap');
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+    --black: #0a0a0f; --dark: #141414; --navy: #1a1d2e;
+    --gold: #facc15; --white: #ffffff; --gray: #6b7280;
+    --glass: rgba(255,255,255,0.05);
+}
+
+body { 
+    font-family: 'Inter', sans-serif; 
+    background: var(--dark); color: white; 
+    line-height: 1.6; overflow-x: hidden;
+}
+
+.navbar {
+    position: fixed; top: 0; left: 0; right: 0;
+    background: rgba(20,20,20,0.95); backdrop-filter: blur(20px);
+    padding: 1rem 5%; z-index: 1000;
+}
+
+.nav-container { max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+
+.logo {
+    font-family: 'Manrope', sans-serif; font-size: 2rem; font-weight: 800;
+    background: linear-gradient(135deg, #facc15, #fbbf24);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+}
+
+.nav-menu { display: flex; gap: 2rem; }
+.nav-link { color: rgba(255,255,255,0.8); text-decoration: none; font-weight: 500; padding: 0.5rem 1rem; border-radius: 8px; transition: all 0.3s; }
+.nav-link:hover, .nav-link.active { color: #facc15; background: rgba(250,204,21,0.1); }
+
+.btn { 
+    padding: 12px 24px; border: none; border-radius: 8px; 
+    font-weight: 600; cursor: pointer; text-decoration: none; 
+    display: inline-flex; align-items: center; gap: 8px;
+    transition: all 0.3s; 
+}
+.btn-primary { background: linear-gradient(135deg, #facc15, #fbbf24); color: #1a1d2e; }
+
+.container { max-width: 1200px; margin: 0 auto; padding: 0 5%; }
+
+.card { 
+    background: rgba(255,255,255,0.05); backdrop-filter: blur(20px);
+    border-radius: 16px; padding: 2rem; border: 1px solid rgba(255,255,255,0.1);
+    transition: all 0.3s; 
+}
+.card:hover { transform: translateY(-5px); box-shadow: 0 20px 40px rgba(0,0,0,0.3); }

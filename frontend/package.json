@@ -1,0 +1,16 @@
+{
+  "name": "vesta-frontend",
+  "version": "1.0.0",
+  "description": "Vesta styling platform frontend",
+  "scripts": {
+    "dev": "live-server --port=3000",
+    "build": "echo 'Build process would go here'",
+    "lint": "eslint .",
+    "format": "prettier --write ."
+  },
+  "devDependencies": {
+    "live-server": "^1.2.2",
+    "eslint": "^8.48.0",
+    "prettier": "^3.0.3"
+  }
+}

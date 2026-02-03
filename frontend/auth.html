@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vesta | Personal Styling</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+<!-- REMOVE these broken ones: -->
+<!-- <link rel="stylesheet" href="assets/css/theme.css"> -->
+<!-- <link rel="stylesheet" href="assets/css/auth.css"> -->
+    
+</head>
+<body>
+    <div class="auth-container">
+        <div class="auth-box">
+            <div class="form-toggle">
+                <button id="loginTab" class="active" onclick="showLogin()">Login</button>
+                <button id="regTab" onclick="showRegister()">Register</button>
+            </div>
+
+            <form id="loginForm" class="auth-form">
+                <h2>Welcome Back</h2>
+                <input type="email" id="loginEmail" placeholder="Email" required>
+                <input type="password" id="loginPass" placeholder="Password" required>
+                <button type="submit" class="btn-main">Enter Vesta</button>
+            </form>
+
+            <form id="regForm" class="auth-form hidden">
+                <h2>Join Vesta</h2>
+                <input type="text" id="regName" placeholder="Full Name" required>
+                <input type="email" id="regEmail" placeholder="Email" required>
+                <input type="password" id="regPass" placeholder="Password" required>
+                
+                <p class="label">Select Style Profile:</p>
+                <div class="profile-grid">
+                    <select id="regSkin">
+                        <option value="Fair">Fair Skin</option>
+                        <option value="Olive">Olive Skin</option>
+                        <option value="Medium">Medium Skin</option>
+                        <option value="Deep">Deep Skin</option>
+                    </select>
+                    <select id="regBody">
+                        <option value="Hourglass">Hourglass</option>
+                        <option value="Pear">Pear Shape</option>
+                        <option value="Rectangle">Rectangle</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn-main">Create Profile</button>
+            </form>
+        </div>
+    </div>
+    <script src="../assets/js/auth.js"></script>
+</body>
+</html>
