@@ -3,88 +3,825 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vesta - AI Fashion Stylist</title>
+    <title>VESTA | AI-Powered Personal Styling Assistant</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { 
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-            background: #141414; color: white; overflow-x: hidden;
-            line-height: 1.4;
-        }
-        .navbar {
-            position: fixed; top: 0; width: 100%; padding: 1rem 4%; 
-            background: rgba(20,20,20,0.95); backdrop-filter: blur(20px);
-            z-index: 1000; display: flex; justify-content: space-between; align-items: center;
-        }
-        .logo { font-size: 2rem; font-weight: 900; color: #e50914; }
-        .nav-links { display: flex; list-style: none; gap: 2rem; }
-        .nav-links a { color: white; text-decoration: none; font-weight: 500; padding: 0.5rem 1rem; border-radius: 4px; transition: 0.3s; }
-        .nav-links a:hover { background: rgba(229,9,20,0.2); }
-        .hero {
-            height: 100vh; background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.8)),
-            url('https://images.unsplash.com/photo-1523381210434-271e8be1f52b?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');
-            background-size: cover; background-position: center; display: flex; align-items: center; justify-content: center; text-align: center;
-        }
-        .hero-content h1 { font-size: clamp(3rem, 8vw, 6rem); font-weight: 900; margin-bottom: 1rem; }
-        .hero p { font-size: 1.5rem; margin-bottom: 2rem; opacity: 0.9; }
-        .btn { 
-            padding: 1rem 2rem; background: #e50914; color: white; border: none; 
-            border-radius: 4px; font-size: 1.1rem; font-weight: 600; cursor: pointer;
-            text-decoration: none; display: inline-block; transition: 0.3s;
-        }
-        .btn:hover { background: #f40612; transform: translateY(-2px); }
-        .features { padding: 100px 4%; max-width: 1200px; margin: 0 auto; }
-        .features h2 { text-align: center; font-size: 3rem; margin-bottom: 4rem; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2rem; }
-        .feature-card {
-            background: rgba(255,255,255,0.05); padding: 2.5rem; border-radius: 12px;
-            text-align: center; backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.1);
-            transition: 0.3s;
-        }
-        .feature-card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0,0,0,0.4); }
-        .feature-icon { font-size: 4rem; color: #e50914; margin-bottom: 1rem; }
-    </style>
+    
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    
+    <!-- Meta Tags -->
+    <meta name="description" content="VESTA is an AI-powered personal styling assistant that helps you discover your perfect style through visual recommendations, digital wardrobe management, and event-based styling.">
+    <meta name="keywords" content="AI fashion, personal styling, digital wardrobe, fashion assistant, style recommendations">
+    <meta name="author" content="Anantika Sharma">
+    <meta property="og:title" content="VESTA | AI-Powered Personal Styling Assistant">
+    <meta property="og:description" content="Discover your perfect style with AI-powered fashion recommendations.">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1490481651871-ab68de25d43d">
+    <meta property="og:url" content="https://vesta-fashion.com">
+    <meta name="twitter:card" content="summary_large_image">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- AOS Animation -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 </head>
 <body>
-    <nav class="navbar">
-        <div class="logo">VESTA</div>
-        <ul class="nav-links">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="explore.html">Explore</a></li>
-            <li><a href="wardrobe.html">Wardrobe</a></li>
-            <li><a href="profile.html">Profile</a></li>
-            <li><a href="login.html" class="btn">Sign In</a></li>
-        </ul>
-    </nav>
+    <!-- Preloader -->
+    <div class="loader">
+        <div class="loader-content">
+            <div class="loader-logo">
+                <i class="fas fa-magic"></i>
+                <span>VESTA</span>
+            </div>
+            <div class="loader-spinner"></div>
+            <p>Initializing Style Intelligence</p>
+        </div>
+    </div>
 
+    <!-- Header -->
+    <header class="header" id="header">
+        <div class="nav-container">
+            <!-- Logo -->
+            <a href="index.html" class="logo">
+                <i class="fas fa-magic logo-icon"></i>
+                <span>VESTA</span>
+            </a>
+
+            <!-- Navigation Menu -->
+            <nav class="nav-menu" id="navMenu">
+                <a href="index.html" class="nav-link active">
+                    <i class="fas fa-home"></i>
+                    <span>Home</span>
+                </a>
+                <a href="wardrobe.html" class="nav-link">
+                    <i class="fas fa-tshirt"></i>
+                    <span>Wardrobe</span>
+                </a>
+                <a href="recommendations.html" class="nav-link">
+                    <i class="fas fa-lightbulb"></i>
+                    <span>Recommendations</span>
+                </a>
+                <a href="inspiration.html" class="nav-link">
+                    <i class="fas fa-images"></i>
+                    <span>Inspiration</span>
+                </a>
+                <a href="events.html" class="nav-link">
+                    <i class="fas fa-calendar-star"></i>
+                    <span>Events</span>
+                </a>
+                <a href="about.html" class="nav-link">
+                    <i class="fas fa-info-circle"></i>
+                    <span>About</span>
+                </a>
+            </nav>
+
+            <!-- Navigation Actions -->
+            <div class="nav-actions">
+                <button class="btn btn-primary btn-sm" onclick="window.location.href='wardrobe.html'">
+                    <i class="fas fa-plus"></i>
+                    <span>Add Item</span>
+                </button>
+                
+                <!-- Profile Dropdown -->
+                <div class="profile-dropdown">
+                    <div class="profile-toggle">
+                        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&h=100" 
+                             alt="Profile" class="profile-img">
+                        <span>Anantika</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="dropdown-menu">
+                        <a href="profile.html" class="dropdown-item">
+                            <i class="fas fa-user"></i>
+                            <span>My Profile</span>
+                        </a>
+                        <a href="wardrobe.html" class="dropdown-item">
+                            <i class="fas fa-tshirt"></i>
+                            <span>My Wardrobe</span>
+                        </a>
+                        <a href="recommendations.html" class="dropdown-item">
+                            <i class="fas fa-heart"></i>
+                            <span>Saved Items</span>
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a href="#" class="dropdown-item">
+                            <i class="fas fa-cog"></i>
+                            <span>Settings</span>
+                        </a>
+                        <a href="#" class="dropdown-item text-danger">
+                            <i class="fas fa-sign-out-alt"></i>
+                            <span>Logout</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Mobile Toggle -->
+                <button class="mobile-toggle" id="mobileToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
     <section class="hero">
-        <div>
-            <h1>AI Fashion<br>Your Perfect Style</h1>
-            <p>Personal stylist powered by AI. Discover outfits that match your unique style.</p>
-            <a href="register.html" class="btn">Start Your Free Trial</a>
+        <div class="container">
+            <div class="hero-content" data-aos="fade-up" data-aos-duration="1000">
+                <h1 class="hero-title">
+                    Discover Your Perfect Style with 
+                    <span class="text-gradient">AI Intelligence</span>
+                </h1>
+                <p class="hero-subtitle">
+                    VESTA combines artificial intelligence with fashion expertise to provide personalized 
+                    styling recommendations, manage your digital wardrobe, and help you dress for every occasion.
+                </p>
+                <div class="hero-actions">
+                    <button class="btn btn-primary btn-lg" onclick="window.location.href='wardrobe.html'">
+                        <i class="fas fa-rocket"></i>
+                        <span>Start Your Journey</span>
+                    </button>
+                    <button class="btn btn-secondary btn-lg" onclick="window.location.href='about.html'">
+                        <i class="fas fa-play-circle"></i>
+                        <span>See How It Works</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Animated Background Elements -->
+        <div class="hero-background">
+            <div class="floating-element" style="top: 20%; left: 10%;"></div>
+            <div class="floating-element" style="top: 60%; right: 15%;"></div>
+            <div class="floating-element" style="bottom: 30%; left: 20%;"></div>
         </div>
     </section>
 
+    <!-- Features Section -->
     <section class="features">
-        <h2>Why Choose Vesta?</h2>
-        <div class="grid">
-            <div class="feature-card">
-                <i class="fas fa-brain feature-icon"></i>
-                <h3>AI Stylist</h3>
-                <p>Smart recommendations based on your wardrobe, body type, and preferences.</p>
+        <div class="container">
+            <div class="section-title" data-aos="fade-up">
+                <h2>Why Choose <span class="text-gradient">VESTA</span></h2>
+                <p>Experience the future of personal styling with our innovative features</p>
             </div>
-            <div class="feature-card">
-                <i class="fas fa-tshirt feature-icon"></i>
-                <h3>Digital Wardrobe</h3>
-                <p>Upload your clothes once, mix & match unlimited combinations.</p>
-            </div>
-            <div class="feature-card">
-                <i class="fas fa-palette feature-icon"></i>
-                <h3>Color Magic</h3>
-                <p>Skin tone analysis finds colors that make you glow.</p>
+
+            <div class="features-grid">
+                <!-- Feature 1 -->
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="feature-icon">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <h3>AI-Powered Recommendations</h3>
+                    <p>
+                        Get personalized outfit, makeup, and hairstyle suggestions based on your 
+                        wardrobe, body type, skin tone, and personal preferences.
+                    </p>
+                    <a href="recommendations.html" class="btn btn-ghost btn-sm mt-4">
+                        Explore Recommendations
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="feature-icon">
+                        <i class="fas fa-tshirt"></i>
+                    </div>
+                    <h3>Digital Wardrobe</h3>
+                    <p>
+                        Upload and organize your clothing items in a virtual wardrobe. Never forget 
+                        what you own and get suggestions on how to style each piece.
+                    </p>
+                    <a href="wardrobe.html" class="btn btn-ghost btn-sm mt-4">
+                        Manage Wardrobe
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="feature-icon">
+                        <i class="fas fa-calendar-alt"></i>
+                    </div>
+                    <h3>Event-Based Styling</h3>
+                    <p>
+                        Get perfect outfit recommendations for any occasion - weddings, interviews, 
+                        parties, dates, and more, considering weather and dress code.
+                    </p>
+                    <a href="events.html" class="btn btn-ghost btn-sm mt-4">
+                        Plan Events
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+
+                <!-- Feature 4 -->
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="400">
+                    <div class="feature-icon">
+                        <i class="fas fa-palette"></i>
+                    </div>
+                    <h3>Style Inspiration</h3>
+                    <p>
+                        Browse thousands of curated fashion looks, save your favorites, and get 
+                        inspired by global trends and celebrity styles.
+                    </p>
+                    <a href="inspiration.html" class="btn btn-ghost btn-sm mt-4">
+                        Get Inspired
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
             </div>
         </div>
     </section>
+
+    <!-- How It Works -->
+    <section class="bg-light py-20">
+        <div class="container">
+            <div class="section-title" data-aos="fade-up">
+                <h2>How <span class="text-gradient">VESTA</span> Works</h2>
+                <p>Three simple steps to transform your personal style</p>
+            </div>
+
+            <div class="timeline">
+                <!-- Step 1 -->
+                <div class="timeline-item" data-aos="fade-right">
+                    <div class="timeline-number">01</div>
+                    <div class="timeline-content">
+                        <h3>Upload Your Wardrobe</h3>
+                        <p>
+                            Take photos of your clothing items, shoes, and accessories. Our AI will 
+                            automatically categorize and tag them for easy organization.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="timeline-item" data-aos="fade-left" data-aos-delay="100">
+                    <div class="timeline-number">02</div>
+                    <div class="timeline-content">
+                        <h3>Set Your Preferences</h3>
+                        <p>
+                            Tell us about your style preferences, body type, skin tone, and occasions 
+                            you need outfits for. The more we know, the better our recommendations.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="timeline-item" data-aos="fade-right" data-aos-delay="200">
+                    <div class="timeline-number">03</div>
+                    <div class="timeline-content">
+                        <h3>Get AI Recommendations</h3>
+                        <p>
+                            Receive personalized outfit combinations, makeup suggestions, and 
+                            hairstyle ideas tailored specifically for you and your occasions.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="py-20">
+        <div class="container">
+            <div class="section-title" data-aos="fade-up">
+                <h2>What Our <span class="text-gradient">Users Say</span></h2>
+                <p>Join thousands of satisfied users who transformed their style with VESTA</p>
+            </div>
+
+            <div class="testimonials-grid">
+                <!-- Testimonial 1 -->
+                <div class="testimonial-card" data-aos="flip-left">
+                    <div class="testimonial-content">
+                        <p>
+                            "VESTA completely changed how I approach fashion. As someone who always 
+                            struggled with putting outfits together, this app has been a game-changer!"
+                        </p>
+                    </div>
+                    <div class="testimonial-author">
+                        <img src="https://images.unsplash.com/photo-1494790108755-2616b612b786?auto=format&fit=crop&w=100&h=100" 
+                             alt="Sarah Chen" class="author-avatar">
+                        <div class="author-info">
+                            <h4>Sarah Chen</h4>
+                            <p>Marketing Executive</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 2 -->
+                <div class="testimonial-card" data-aos="flip-left" data-aos-delay="100">
+                    <div class="testimonial-content">
+                        <p>
+                            "The event-based styling feature saved me so much time preparing for my 
+                            friend's wedding. Perfect recommendations every time!"
+                        </p>
+                    </div>
+                    <div class="testimonial-author">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&h=100" 
+                             alt="Michael Rodriguez" class="author-avatar">
+                        <div class="author-info">
+                            <h4>Michael Rodriguez</h4>
+                            <p>Software Engineer</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 3 -->
+                <div class="testimonial-card" data-aos="flip-left" data-aos-delay="200">
+                    <div class="testimonial-content">
+                        <p>
+                            "I love how VESTA helps me maximize my existing wardrobe. Discovered so 
+                            many new outfit combinations I never would have thought of!"
+                        </p>
+                    </div>
+                    <div class="testimonial-author">
+                        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&h=100" 
+                             alt="Priya Sharma" class="author-avatar">
+                        <div class="author-info">
+                            <h4>Priya Sharma</h4>
+                            <p>Graphic Designer</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content" data-aos="zoom-in">
+                <h2>Ready to Transform Your Style?</h2>
+                <p>
+                    Join thousands of users who discovered their perfect style with VESTA. 
+                    Start your style journey today - it's free!
+                </p>
+                <div class="cta-actions">
+                    <button class="btn btn-primary btn-lg" onclick="window.location.href='wardrobe.html'">
+                        <i class="fas fa-user-plus"></i>
+                        <span>Create Free Account</span>
+                    </button>
+                    <button class="btn btn-secondary btn-lg" onclick="window.location.href='about.html'">
+                        <i class="fas fa-play-circle"></i>
+                        <span>Watch Demo</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-column">
+                <div class="footer-logo">
+                    <i class="fas fa-magic"></i>
+                    <span>VESTA</span>
+                </div>
+                <p class="footer-description">
+                    AI-powered personal styling platform that brings fashion to life through 
+                    visual intelligence and machine learning.
+                </p>
+                <div class="footer-social">
+                    <a href="#" class="social-link">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="#" class="social-link">
+                        <i class="fab fa-pinterest"></i>
+                    </a>
+                    <a href="#" class="social-link">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#" class="social-link">
+                        <i class="fab fa-github"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="footer-column">
+                <h3>Platform</h3>
+                <ul class="footer-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="wardrobe.html">Digital Wardrobe</a></li>
+                    <li><a href="recommendations.html">AI Recommendations</a></li>
+                    <li><a href="inspiration.html">Style Inspiration</a></li>
+                    <li><a href="events.html">Event Styling</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-column">
+                <h3>Resources</h3>
+                <ul class="footer-links">
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="#">Style Guides</a></li>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-column">
+                <h3>Legal</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                    <li><a href="#">Cookie Policy</a></li>
+                    <li><a href="#">GDPR Compliance</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2024 VESTA. All rights reserved.</p>
+            <div class="tech-stack">
+                <span>Powered by:</span>
+                <span class="tech-tag">MongoDB</span>
+                <span class="tech-tag">Express.js</span>
+                <span class="tech-tag">React</span>
+                <span class="tech-tag">Node.js</span>
+                <span class="tech-tag">TensorFlow.js</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top -->
+    <button class="back-to-top" id="backToTop">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <!-- JavaScript -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="script.js"></script>
+    
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 1000,
+            once: true,
+            offset: 100
+        });
+
+        // Initialize VESTA App
+        document.addEventListener('DOMContentLoaded', function() {
+            // Header scroll effect
+            window.addEventListener('scroll', function() {
+                const header = document.getElementById('header');
+                if (window.scrollY > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+
+            // Mobile menu toggle
+            const mobileToggle = document.getElementById('mobileToggle');
+            const navMenu = document.getElementById('navMenu');
+
+            mobileToggle.addEventListener('click', function() {
+                navMenu.classList.toggle('active');
+                mobileToggle.innerHTML = navMenu.classList.contains('active') 
+                    ? '<i class="fas fa-times"></i>' 
+                    : '<i class="fas fa-bars"></i>';
+            });
+
+            // Close mobile menu when clicking outside
+            document.addEventListener('click', function(event) {
+                if (!navMenu.contains(event.target) && !mobileToggle.contains(event.target)) {
+                    navMenu.classList.remove('active');
+                    mobileToggle.innerHTML = '<i class="fas fa-bars"></i>';
+                }
+            });
+
+            // Back to top button
+            const backToTop = document.getElementById('backToTop');
+            
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 300) {
+                    backToTop.classList.add('visible');
+                } else {
+                    backToTop.classList.remove('visible');
+                }
+            });
+
+            backToTop.addEventListener('click', function() {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+
+            // Hide loader after 2 seconds
+            setTimeout(() => {
+                document.querySelector('.loader').classList.add('hidden');
+            }, 2000);
+        });
+    </script>
+
+    <!-- Additional Styles for this page -->
+    <style>
+        .text-gradient {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            display: inline-block;
+        }
+
+        .hero-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 0;
+        }
+
+        .floating-element {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            background: linear-gradient(135deg, rgba(124, 58, 237, 0.1), rgba(236, 72, 153, 0.1));
+            border-radius: 50%;
+            filter: blur(60px);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .floating-element:nth-child(2) {
+            animation-delay: 2s;
+            width: 150px;
+            height: 150px;
+        }
+
+        .floating-element:nth-child(3) {
+            animation-delay: 4s;
+            width: 100px;
+            height: 100px;
+        }
+
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, transparent, var(--primary), transparent);
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: var(--space-12);
+            position: relative;
+        }
+
+        .timeline-item:nth-child(odd) {
+            flex-direction: row-reverse;
+            text-align: right;
+        }
+
+        .timeline-number {
+            width: 60px;
+            height: 60px;
+            background: var(--gradient-primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            flex-shrink: 0;
+            margin: 0 var(--space-8);
+            position: relative;
+            z-index: 1;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .timeline-content {
+            flex: 1;
+            background: white;
+            padding: var(--space-6);
+            border-radius: var(--radius-xl);
+            border: 1px solid var(--gray-200);
+            box-shadow: var(--shadow-md);
+        }
+
+        .timeline-content h3 {
+            margin-bottom: var(--space-3);
+            color: var(--gray-900);
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--space-8);
+            max-width: var(--max-width);
+            margin: 0 auto;
+        }
+
+        .testimonial-card {
+            background: white;
+            border-radius: var(--radius-xl);
+            border: 1px solid var(--gray-200);
+            padding: var(--space-8);
+            transition: var(--transition-normal);
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-2xl);
+            border-color: transparent;
+        }
+
+        .testimonial-content p {
+            font-style: italic;
+            color: var(--gray-600);
+            margin-bottom: var(--space-6);
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: var(--space-4);
+        }
+
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--gray-100);
+        }
+
+        .author-info h4 {
+            margin-bottom: var(--space-1);
+            font-size: 1rem;
+        }
+
+        .author-info p {
+            color: var(--gray-500);
+            font-size: 0.875rem;
+            margin: 0;
+        }
+
+        .cta-section {
+            padding: var(--space-20) 0;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23ffffff" fill-opacity="0.1" d="M0,96L48,112C96,128,192,160,288,186.7C384,213,480,235,576,213.3C672,192,768,128,864,128C960,128,1056,192,1152,208C1248,224,1344,192,1392,176L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .cta-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .cta-content h2 {
+            font-size: 3rem;
+            margin-bottom: var(--space-4);
+            color: white;
+        }
+
+        .cta-content p {
+            font-size: 1.25rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: var(--space-8);
+        }
+
+        .cta-actions {
+            display: flex;
+            gap: var(--space-4);
+            justify-content: center;
+        }
+
+        .cta-section .btn-primary {
+            background: white;
+            color: var(--primary);
+        }
+
+        .cta-section .btn-primary:hover {
+            background: var(--gray-100);
+        }
+
+        .cta-section .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .cta-section .btn-secondary:hover {
+            background: white;
+            color: var(--primary);
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: var(--space-6);
+            right: var(--space-6);
+            width: 50px;
+            height: 50px;
+            background: var(--gradient-primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: none;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: var(--transition-normal);
+            z-index: 100;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        @media (max-width: 768px) {
+            .timeline::before {
+                left: 30px;
+            }
+
+            .timeline-item {
+                flex-direction: row !important;
+                text-align: left !important;
+                margin-left: 60px;
+            }
+
+            .timeline-number {
+                position: absolute;
+                left: -60px;
+                margin: 0;
+            }
+
+            .cta-actions {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .cta-actions .btn {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-title {
+                font-size: 2.25rem;
+            }
+
+            .cta-content h2 {
+                font-size: 2.25rem;
+            }
+
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </body>
 </html>

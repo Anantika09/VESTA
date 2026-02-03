@@ -3,42 +3,1418 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profile | Vesta</title>
+    <title>My Profile | VESTA - Personal Style Profile</title>
+    
+    <!-- Fonts & Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="global.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="https://img.icons8.com/color/96/000000/dress.png">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Profile Specific CSS -->
+    <style>
+        /* Profile Page Specific Styles */
+        .profile-page {
+            padding: var(--space-xl) var(--space-md);
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .page-header-profile {
+            margin-bottom: var(--space-2xl);
+        }
+        
+        /* Profile Header */
+        .profile-header {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: var(--space-xl);
+            background: white;
+            border-radius: var(--radius-xl);
+            padding: var(--space-2xl);
+            box-shadow: var(--shadow-md);
+            margin-bottom: var(--space-2xl);
+            align-items: center;
+        }
+        
+        .profile-avatar {
+            position: relative;
+        }
+        
+        .avatar-image {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid white;
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .avatar-upload {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            width: 40px;
+            height: 40px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            border: 3px solid white;
+        }
+        
+        .avatar-upload:hover {
+            background: var(--primary-dark);
+            transform: scale(1.1);
+        }
+        
+        .profile-info {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-sm);
+        }
+        
+        .profile-name {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--dark);
+        }
+        
+        .profile-title {
+            color: var(--primary);
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+        
+        .profile-stats {
+            display: flex;
+            gap: var(--space-xl);
+            margin-top: var(--space-md);
+        }
+        
+        .stat-item-profile {
+            text-align: center;
+        }
+        
+        .stat-number-profile {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+            display: block;
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+        
+        /* Profile Sections */
+        .profile-sections {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-xl);
+        }
+        
+        @media (max-width: 1024px) {
+            .profile-sections {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* Profile Card */
+        .profile-card {
+            background: white;
+            border-radius: var(--radius-lg);
+            padding: var(--space-xl);
+            box-shadow: var(--shadow-md);
+            margin-bottom: var(--space-xl);
+        }
+        
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--space-lg);
+            padding-bottom: var(--space-md);
+            border-bottom: 2px solid var(--gray-light);
+        }
+        
+        .card-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--dark);
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+        }
+        
+        .card-title i {
+            color: var(--primary);
+        }
+        
+        .edit-btn {
+            background: none;
+            border: none;
+            color: var(--primary);
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: var(--space-xs);
+            padding: var(--space-xs) var(--space-sm);
+            border-radius: var(--radius-sm);
+            transition: var(--transition-fast);
+        }
+        
+        .edit-btn:hover {
+            background: rgba(138, 43, 226, 0.1);
+        }
+        
+        /* Style Profile */
+        .style-tags {
+            display: flex;
+            gap: var(--space-sm);
+            flex-wrap: wrap;
+            margin-top: var(--space-md);
+        }
+        
+        .style-tag {
+            background: rgba(138, 43, 226, 0.1);
+            color: var(--primary);
+            padding: 8px 16px;
+            border-radius: var(--radius-full);
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+        
+        .style-tag:hover {
+            background: var(--primary);
+            color: white;
+            cursor: pointer;
+        }
+        
+        /* Body Measurements */
+        .measurements-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--space-md);
+        }
+        
+        .measurement-item {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        
+        .measurement-label {
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+        
+        .measurement-value {
+            font-weight: 600;
+            color: var(--dark);
+        }
+        
+        /* Color Palette */
+        .color-palette-profile {
+            display: flex;
+            gap: var(--space-sm);
+            margin-top: var(--space-md);
+        }
+        
+        .color-circle {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 3px solid white;
+            box-shadow: var(--shadow-sm);
+            cursor: pointer;
+            position: relative;
+        }
+        
+        .color-circle:hover::after {
+            content: attr(data-color);
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--dark);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            white-space: nowrap;
+        }
+        
+        /* Saved Items */
+        .saved-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: var(--space-md);
+            margin-top: var(--space-lg);
+        }
+        
+        .saved-item {
+            position: relative;
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            height: 150px;
+            cursor: pointer;
+        }
+        
+        .saved-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        
+        .saved-item:hover img {
+            transform: scale(1.1);
+        }
+        
+        .saved-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .saved-item:hover .saved-overlay {
+            opacity: 1;
+        }
+        
+        .saved-remove {
+            width: 40px;
+            height: 40px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--danger);
+            border: none;
+            cursor: pointer;
+        }
+        
+        /* Activity Feed */
+        .activity-list {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-lg);
+        }
+        
+        .activity-item {
+            display: flex;
+            gap: var(--space-md);
+            padding-bottom: var(--space-lg);
+            border-bottom: 1px solid var(--gray-light);
+        }
+        
+        .activity-item:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+        
+        .activity-icon {
+            width: 50px;
+            height: 50px;
+            background: rgba(138, 43, 226, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: var(--primary);
+            flex-shrink: 0;
+        }
+        
+        .activity-content h4 {
+            margin-bottom: 4px;
+        }
+        
+        .activity-time {
+            font-size: 0.85rem;
+            color: var(--gray);
+        }
+        
+        /* Settings */
+        .settings-list {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-md);
+        }
+        
+        .setting-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--space-md);
+            background: var(--gray-light);
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            transition: var(--transition-fast);
+        }
+        
+        .setting-item:hover {
+            background: var(--gray);
+            color: white;
+        }
+        
+        .toggle-switch {
+            position: relative;
+            width: 50px;
+            height: 24px;
+        }
+        
+        .toggle-checkbox {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        
+        .toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 34px;
+        }
+        
+        .toggle-slider:before {
+            position: absolute;
+            content: "";
+            height: 16px;
+            width: 16px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+        
+        .toggle-checkbox:checked + .toggle-slider {
+            background-color: var(--primary);
+        }
+        
+        .toggle-checkbox:checked + .toggle-slider:before {
+            transform: translateX(26px);
+        }
+        
+        /* Edit Modal */
+        .edit-modal .modal-content {
+            max-width: 500px;
+        }
+        
+        .edit-form {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-lg);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .profile-header {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
+            .profile-stats {
+                justify-content: center;
+            }
+            
+            .measurements-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .saved-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .saved-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .profile-name {
+                font-size: 2rem;
+            }
+        }
+    </style>
 </head>
 <body>
+    <!-- Loading Screen -->
+    <div class="loader">
+        <div class="loader-content">
+            <div class="loader-logo">
+                <i class="fas fa-star"></i>
+                <span>VESTA</span>
+            </div>
+            <div class="loader-spinner"></div>
+            <p>Loading your profile...</p>
+        </div>
+    </div>
+
+    <!-- Navigation -->
     <nav class="navbar">
         <div class="nav-container">
-            <a href="index.html" class="logo">VESTA</a>
+            <a href="index.html" class="logo">
+                <i class="fas fa-magic"></i>
+                <span>VESTA</span>
+            </a>
+            
             <div class="nav-menu">
-                <a href="index.html" class="nav-link">Home</a>
-                <a href="explore.html" class="nav-link">Explore</a>
-                <a href="wardrobe.html" class="nav-link">Wardrobe</a>
-                <a href="profile.html" class="nav-link active">Profile</a>
+                <a href="index.html" class="nav-link">
+                    <i class="fas fa-home"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="wardrobe.html" class="nav-link">
+                    <i class="fas fa-tshirt"></i>
+                    <span>My Wardrobe</span>
+                </a>
+                <a href="recommendations.html" class="nav-link">
+                    <i class="fas fa-lightbulb"></i>
+                    <span>Recommendations</span>
+                </a>
+                <a href="inspiration.html" class="nav-link">
+                    <i class="fas fa-images"></i>
+                    <span>Inspiration</span>
+                </a>
+                <a href="events.html" class="nav-link">
+                    <i class="fas fa-calendar-star"></i>
+                    <span>Events</span>
+                </a>
             </div>
-            <a href="login.html" class="btn btn-primary">Dashboard</a>
-        </div>
-    </nav>
-
-    <section style="padding: 120px 0 80px;">
-        <div class="container">
-            <div style="display: grid; grid-template-columns: 300px 1fr; gap: 3rem; max-width: 1000px; margin: 0 auto;">
-                <div class="card" style="text-align: center;">
-                    <div style="width: 120px; height: 120px; background: linear-gradient(135deg, #facc15, #fbbf24); border-radius: 50%; margin: 0 auto 1.5rem; display: flex; align-items: center; justify-content: center; font-size: 2rem;">JD</div>
-                    <h2>John Doe</h2>
-                    <p style="color: #6b7280;">Premium Member</p>
-                </div>
-                <div class="card">
-                    <h3 style="color: #facc15; margin-bottom: 1.5rem;">Your Stats</h3>
-                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem;">
-                        <div><strong>150+</strong><br><small>Outfits Created</small></div>
-                        <div><strong>98%</strong><br><small>Style Match</small></div>
-                        <div><strong>42</strong><br><small>Wardrobe Items</small></div>
+            
+            <div class="nav-profile">
+                <div class="profile-dropdown">
+                    <div class="profile-toggle">
+                        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&h=100" 
+                             alt="Profile" class="profile-img">
+                        <span>Anantika</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="dropdown-menu">
+                        <a href="profile.html" class="dropdown-item active">
+                            <i class="fas fa-user"></i> My Profile
+                        </a>
+                        <a href="#" class="dropdown-item">
+                            <i class="fas fa-cog"></i> Settings
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a href="#" class="dropdown-item logout">
+                            <i class="fas fa-sign-out-alt"></i> Logout
+                        </a>
                     </div>
                 </div>
             </div>
+            
+            <button class="mobile-toggle">
+                <i class="fas fa-bars"></i>
+            </button>
         </div>
-    </section>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="profile-page">
+        <!-- Page Header -->
+        <div class="page-header-profile">
+            <h1 class="hero-title">My <span class="gradient-text">Style Profile</span></h1>
+            <p class="page-subtitle">Your personal style preferences, measurements, and saved items</p>
+        </div>
+
+        <!-- Profile Header -->
+        <section class="profile-header">
+            <div class="profile-avatar">
+                <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&h=400" 
+                     alt="Profile" class="avatar-image">
+                <div class="avatar-upload" onclick="uploadProfilePicture()">
+                    <i class="fas fa-camera"></i>
+                    <input type="file" id="profilePictureInput" accept="image/*" hidden>
+                </div>
+            </div>
+            
+            <div class="profile-info">
+                <h1 class="profile-name" id="userNameDisplay">Anantika Sharma</h1>
+                <div class="profile-title">Fashion Enthusiast • BTech CS Student</div>
+                <p style="color: var(--gray); margin-top: var(--space-sm);">
+                    Joined VESTA in January 2024. Loves experimenting with different styles and creating unique looks.
+                </p>
+                
+                <div class="profile-stats">
+                    <div class="stat-item-profile">
+                        <span class="stat-number-profile" id="wardrobeCount">42</span>
+                        <span class="stat-label">Wardrobe Items</span>
+                    </div>
+                    <div class="stat-item-profile">
+                        <span class="stat-number-profile" id="savedCount">18</span>
+                        <span class="stat-label">Saved Looks</span>
+                    </div>
+                    <div class="stat-item-profile">
+                        <span class="stat-number-profile" id="eventsCount">5</span>
+                        <span class="stat-label">Events Planned</span>
+                    </div>
+                    <div class="stat-item-profile">
+                        <span class="stat-number-profile" id="styleScore">92</span>
+                        <span class="stat-label">Style Score</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Profile Sections -->
+        <div class="profile-sections">
+            <!-- Left Column -->
+            <div class="profile-left">
+                <!-- Personal Information -->
+                <section class="profile-card">
+                    <div class="card-header">
+                        <h3 class="card-title">
+                            <i class="fas fa-user-circle"></i>
+                            Personal Information
+                        </h3>
+                        <button class="edit-btn" onclick="editPersonalInfo()">
+                            <i class="fas fa-edit"></i> Edit
+                        </button>
+                    </div>
+                    
+                    <div class="personal-info">
+                        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-lg);">
+                            <div>
+                                <div class="measurement-item">
+                                    <span class="measurement-label">Full Name</span>
+                                    <span class="measurement-value" id="profileName">Anantika Sharma</span>
+                                </div>
+                                <div class="measurement-item">
+                                    <span class="measurement-label">Email</span>
+                                    <span class="measurement-value" id="profileEmail">anantika@example.com</span>
+                                </div>
+                                <div class="measurement-item">
+                                    <span class="measurement-label">Location</span>
+                                    <span class="measurement-value" id="profileLocation">New Delhi, India</span>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="measurement-item">
+                                    <span class="measurement-label">Member Since</span>
+                                    <span class="measurement-value" id="joinDate">January 15, 2024</span>
+                                </div>
+                                <div class="measurement-item">
+                                    <span class="measurement-label">Style Personality</span>
+                                    <span class="measurement-value" id="stylePersonality">Creative Explorer</span>
+                                </div>
+                                <div class="measurement-item">
+                                    <span class="measurement-label">Fashion Goals</span>
+                                    <span class="measurement-value" id="fashionGoals">Build versatile capsule wardrobe</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Style Profile -->
+                <section class="profile-card">
+                    <div class="card-header">
+                        <h3 class="card-title">
+                            <i class="fas fa-palette"></i>
+                            Style Profile
+                        </h3>
+                        <button class="edit-btn" onclick="editStyleProfile()">
+                            <i class="fas fa-edit"></i> Edit
+                        </button>
+                    </div>
+                    
+                    <div class="style-profile">
+                        <div style="margin-bottom: var(--space-lg);">
+                            <h4 style="margin-bottom: var(--space-sm);">Preferred Styles</h4>
+                            <div class="style-tags" id="styleTags">
+                                <span class="style-tag">Minimalist</span>
+                                <span class="style-tag">Bohemian</span>
+                                <span class="style-tag">Modern</span>
+                                <span class="style-tag">Classic</span>
+                                <span class="style-tag">Streetwear</span>
+                            </div>
+                        </div>
+                        
+                        <div style="margin-bottom: var(--space-lg);">
+                            <h4 style="margin-bottom: var(--space-sm);">Favorite Colors</h4>
+                            <div class="color-palette-profile">
+                                <div class="color-circle" style="background: #8A2BE2;" data-color="Purple"></div>
+                                <div class="color-circle" style="background: #000000;" data-color="Black"></div>
+                                <div class="color-circle" style="background: #FFFFFF; border: 1px solid #ddd;" data-color="White"></div>
+                                <div class="color-circle" style="background: #FF6B6B;" data-color="Coral"></div>
+                                <div class="color-circle" style="background: #4ECDC4;" data-color="Teal"></div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <h4 style="margin-bottom: var(--space-sm);">Style Preferences</h4>
+                            <p style="color: var(--gray); font-size: 0.95rem;">
+                                I prefer comfortable yet stylish clothing, love experimenting with accessories, 
+                                and enjoy mixing high-end pieces with affordable finds. I dress for confidence and self-expression.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Body Measurements -->
+                <section class="profile-card">
+                    <div class="card-header">
+                        <h3 class="card-title">
+                            <i class="fas fa-ruler-combined"></i>
+                            Body Measurements
+                        </h3>
+                        <button class="edit-btn" onclick="editMeasurements()">
+                            <i class="fas fa-edit"></i> Edit
+                        </button>
+                    </div>
+                    
+                    <div class="measurements-grid">
+                        <div class="measurement-item">
+                            <span class="measurement-label">Height</span>
+                            <span class="measurement-value" id="heightValue">5'4" (163 cm)</span>
+                        </div>
+                        <div class="measurement-item">
+                            <span class="measurement-label">Body Type</span>
+                            <span class="measurement-value" id="bodyTypeValue">Hourglass</span>
+                        </div>
+                        <div class="measurement-item">
+                            <span class="measurement-label">Skin Tone</span>
+                            <span class="measurement-value" id="skinToneValue">Medium-Warm</span>
+                        </div>
+                        <div class="measurement-item">
+                            <span class="measurement-label">Hair Type</span>
+                            <span class="measurement-value" id="hairTypeValue">Straight, Long</span>
+                        </div>
+                        <div class="measurement-item">
+                            <span class="measurement-label">Size Category</span>
+                            <span class="measurement-value" id="sizeCategory">Medium (M)</span>
+                        </div>
+                        <div class="measurement-item">
+                            <span class="measurement-label">Shoe Size</span>
+                            <span class="measurement-value" id="shoeSize">US 7.5</span>
+                        </div>
+                    </div>
+                    
+                    <div style="margin-top: var(--space-lg); padding: var(--space-md); background: rgba(138, 43, 226, 0.05); border-radius: var(--radius-md);">
+                        <p style="font-size: 0.9rem; color: var(--gray);">
+                            <i class="fas fa-info-circle" style="color: var(--primary);"></i>
+                            These measurements help VESTA provide accurate size recommendations and personalized styling suggestions.
+                        </p>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Right Column -->
+            <div class="profile-right">
+                <!-- Saved Items -->
+                <section class="profile-card">
+                    <div class="card-header">
+                        <h3 class="card-title">
+                            <i class="fas fa-bookmark"></i>
+                            Saved Items
+                        </h3>
+                        <a href="inspiration.html" class="edit-btn">
+                            <i class="fas fa-eye"></i> View All
+                        </a>
+                    </div>
+                    
+                    <div class="saved-grid" id="savedItemsGrid">
+                        <!-- Saved items will be loaded via JavaScript -->
+                    </div>
+                    
+                    <div style="text-align: center; margin-top: var(--space-lg);">
+                        <button class="btn-secondary" onclick="window.location.href='inspiration.html'">
+                            <i class="fas fa-plus"></i> Browse More Inspiration
+                        </button>
+                    </div>
+                </section>
+
+                <!-- Recent Activity -->
+                <section class="profile-card">
+                    <div class="card-header">
+                        <h3 class="card-title">
+                            <i class="fas fa-history"></i>
+                            Recent Activity
+                        </h3>
+                    </div>
+                    
+                    <div class="activity-list" id="activityList">
+                        <!-- Activity items will be loaded via JavaScript -->
+                    </div>
+                </section>
+
+                <!-- Settings -->
+                <section class="profile-card">
+                    <div class="card-header">
+                        <h3 class="card-title">
+                            <i class="fas fa-cog"></i>
+                            Account Settings
+                        </h3>
+                    </div>
+                    
+                    <div class="settings-list">
+                        <div class="setting-item" onclick="toggleNotificationSetting()">
+                            <span>Push Notifications</span>
+                            <label class="toggle-switch">
+                                <input type="checkbox" class="toggle-checkbox" checked>
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                        
+                        <div class="setting-item" onclick="toggleEmailSetting()">
+                            <span>Email Updates</span>
+                            <label class="toggle-switch">
+                                <input type="checkbox" class="toggle-checkbox" checked>
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                        
+                        <div class="setting-item" onclick="togglePrivacySetting()">
+                            <span>Private Profile</span>
+                            <label class="toggle-switch">
+                                <input type="checkbox" class="toggle-checkbox">
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                        
+                        <div class="setting-item" onclick="window.location.href='#privacy'">
+                            <span>Privacy Policy</span>
+                            <i class="fas fa-chevron-right"></i>
+                        </div>
+                        
+                        <div class="setting-item" onclick="window.location.href='#help'">
+                            <span>Help & Support</span>
+                            <i class="fas fa-chevron-right"></i>
+                        </div>
+                        
+                        <div class="setting-item" onclick="exportData()" style="color: var(--primary);">
+                            <span>Export My Data</span>
+                            <i class="fas fa-download"></i>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- AI Style Analysis -->
+                <section class="profile-card">
+                    <div class="card-header">
+                        <h3 class="card-title">
+                            <i class="fas fa-robot"></i>
+                            AI Style Analysis
+                        </h3>
+                    </div>
+                    
+                    <div style="text-align: center; padding: var(--space-lg);">
+                        <div style="width: 100px; height: 100px; background: linear-gradient(135deg, var(--primary), var(--secondary)); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto var(--space-lg);">
+                            <span style="color: white; font-size: 2rem; font-weight: 700;">92</span>
+                        </div>
+                        <h3 style="margin-bottom: var(--space-sm);">Excellent Style Match</h3>
+                        <p style="color: var(--gray); margin-bottom: var(--space-lg);">
+                            Based on your profile and preferences, our AI has found excellent matches for your style.
+                        </p>
+                        <button class="btn-primary" onclick="window.location.href='recommendations.html'">
+                            <i class="fas fa-lightbulb"></i> Get Personalized Recommendations
+                        </button>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <!-- Edit Personal Info Modal -->
+    <div class="modal edit-modal" id="editPersonalModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Edit Personal Information</h3>
+                <button class="modal-close" onclick="closeEditModal('editPersonalModal')">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form class="edit-form">
+                    <div class="form-group">
+                        <label for="editName">Full Name</label>
+                        <input type="text" id="editName" class="form-control" value="Anantika Sharma">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="editEmail">Email Address</label>
+                        <input type="email" id="editEmail" class="form-control" value="anantika@example.com">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="editLocation">Location</label>
+                        <input type="text" id="editLocation" class="form-control" value="New Delhi, India">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="editGoals">Fashion Goals</label>
+                        <textarea id="editGoals" class="form-control" rows="3">Build versatile capsule wardrobe</textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-secondary" onclick="closeEditModal('editPersonalModal')">Cancel</button>
+                <button class="btn-primary" onclick="savePersonalInfo()">Save Changes</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <div class="footer-logo">
+                    <i class="fas fa-magic"></i>
+                    <span>VESTA</span>
+                </div>
+                <p class="footer-description">
+                    AI-powered personal styling platform that brings fashion to life through visual intelligence.
+                </p>
+                <div class="footer-social">
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-pinterest"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-github"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Platform</h4>
+                <ul class="footer-links">
+                    <li><a href="index.html">Dashboard</a></li>
+                    <li><a href="wardrobe.html">Digital Wardrobe</a></li>
+                    <li><a href="recommendations.html">AI Recommendations</a></li>
+                    <li><a href="inspiration.html">Style Inspiration</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4>My Account</h4>
+                <ul class="footer-links">
+                    <li><a href="profile.html">Profile</a></li>
+                    <li><a href="wardrobe.html">Wardrobe</a></li>
+                    <li><a href="#">Saved Items</a></li>
+                    <li><a href="#">Style History</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Connect</h4>
+                <ul class="footer-links">
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                    <li><a href="#">Developer API</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2024 VESTA | BTech CS Project | Created with <i class="fas fa-heart"></i> for showcasing full-stack skills</p>
+            <p class="tech-stack">
+                <span>Tech Stack:</span>
+                <span class="tech-tag">MongoDB</span>
+                <span class="tech-tag">Express.js</span>
+                <span class="tech-tag">React</span>
+                <span class="tech-tag">Node.js</span>
+                <span class="tech-tag">TensorFlow.js</span>
+            </p>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+    
+    <!-- Profile Page Specific JavaScript -->
+    <script>
+        // Initialize profile page
+        document.addEventListener('DOMContentLoaded', function() {
+            loadProfileData();
+            loadSavedItems();
+            loadActivity();
+            initEventListeners();
+        });
+        
+        // Profile data
+        const profileData = {
+            name: "Anantika Sharma",
+            email: "anantika@example.com",
+            location: "New Delhi, India",
+            joinDate: "January 15, 2024",
+            stylePersonality: "Creative Explorer",
+            fashionGoals: "Build versatile capsule wardrobe",
+            preferredStyles: ["Minimalist", "Bohemian", "Modern", "Classic", "Streetwear"],
+            favoriteColors: ["#8A2BE2", "#000000", "#FFFFFF", "#FF6B6B", "#4ECDC4"],
+            measurements: {
+                height: "5'4\" (163 cm)",
+                bodyType: "Hourglass",
+                skinTone: "Medium-Warm",
+                hairType: "Straight, Long",
+                sizeCategory: "Medium (M)",
+                shoeSize: "US 7.5"
+            },
+            stats: {
+                wardrobeItems: 42,
+                savedLooks: 18,
+                eventsPlanned: 5,
+                styleScore: 92
+            }
+        };
+        
+        // Load profile data
+        function loadProfileData() {
+            // Update profile header
+            document.getElementById('userNameDisplay').textContent = profileData.name;
+            document.getElementById('profileName').textContent = profileData.name;
+            document.getElementById('profileEmail').textContent = profileData.email;
+            document.getElementById('profileLocation').textContent = profileData.location;
+            document.getElementById('joinDate').textContent = profileData.joinDate;
+            document.getElementById('stylePersonality').textContent = profileData.stylePersonality;
+            document.getElementById('fashionGoals').textContent = profileData.fashionGoals;
+            
+            // Update measurements
+            document.getElementById('heightValue').textContent = profileData.measurements.height;
+            document.getElementById('bodyTypeValue').textContent = profileData.measurements.bodyType;
+            document.getElementById('skinToneValue').textContent = profileData.measurements.skinTone;
+            document.getElementById('hairTypeValue').textContent = profileData.measurements.hairType;
+            document.getElementById('sizeCategory').textContent = profileData.measurements.sizeCategory;
+            document.getElementById('shoeSize').textContent = profileData.measurements.shoeSize;
+            
+            // Update stats
+            document.getElementById('wardrobeCount').textContent = profileData.stats.wardrobeItems;
+            document.getElementById('savedCount').textContent = profileData.stats.savedLooks;
+            document.getElementById('eventsCount').textContent = profileData.stats.eventsPlanned;
+            document.getElementById('styleScore').textContent = profileData.stats.styleScore;
+            
+            // Update style tags
+            const styleTagsContainer = document.getElementById('styleTags');
+            styleTagsContainer.innerHTML = profileData.preferredStyles
+                .map(style => `<span class="style-tag">${style}</span>`)
+                .join('');
+        }
+        
+        // Load saved items
+        function loadSavedItems() {
+            const savedItems = [
+                {
+                    id: 1,
+                    image: "https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?auto=format&fit=crop&w=400",
+                    title: "Evening Glam Look"
+                },
+                {
+                    id: 2,
+                    image: "https://images.unsplash.com/photo-1525507119028-ed4c629a60a3?auto=format&fit=crop&w=400",
+                    title: "Casual Weekend"
+                },
+                {
+                    id: 3,
+                    image: "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=400",
+                    title: "Soft Glam Makeup"
+                },
+                {
+                    id: 4,
+                    image: "https://images.unsplash.com/photo-1566977744263-79e677bb4c57?auto=format&fit=crop&w=400",
+                    title: "Floral Summer Dress"
+                },
+                {
+                    id: 5,
+                    image: "https://images.unsplash.com/photo-1596703923338-48f1c07e4f2e?auto=format&fit=crop&w=400",
+                    title: "Elegant Updo"
+                },
+                {
+                    id: 6,
+                    image: "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=400",
+                    title: "Statement Jewelry"
+                }
+            ];
+            
+            const savedGrid = document.getElementById('savedItemsGrid');
+            savedGrid.innerHTML = savedItems.map(item => `
+                <div class="saved-item" onclick="viewSavedItem(${item.id})">
+                    <img src="${item.image}" alt="${item.title}">
+                    <div class="saved-overlay">
+                        <button class="saved-remove" onclick="removeSavedItem(event, ${item.id})">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        // Load activity
+        function loadActivity() {
+            const activities = [
+                {
+                    id: 1,
+                    icon: "fas fa-tshirt",
+                    title: "Added new item to wardrobe",
+                    description: "Black Leather Jacket",
+                    time: "2 hours ago"
+                },
+                {
+                    id: 2,
+                    icon: "fas fa-lightbulb",
+                    title: "Received AI recommendations",
+                    description: "3 new outfit suggestions",
+                    time: "1 day ago"
+                },
+                {
+                    id: 3,
+                    icon: "fas fa-bookmark",
+                    title: "Saved inspiration look",
+                    description: "Evening Glam Look",
+                    time: "2 days ago"
+                },
+                {
+                    id: 4,
+                    icon: "fas fa-calendar-alt",
+                    title: "Planned new event",
+                    description: "Friend's Wedding on March 15",
+                    time: "3 days ago"
+                },
+                {
+                    id: 5,
+                    icon: "fas fa-star",
+                    title: "Style score updated",
+                    description: "Improved from 88 to 92",
+                    time: "1 week ago"
+                }
+            ];
+            
+            const activityList = document.getElementById('activityList');
+            activityList.innerHTML = activities.map(activity => `
+                <div class="activity-item">
+                    <div class="activity-icon">
+                        <i class="${activity.icon}"></i>
+                    </div>
+                    <div class="activity-content">
+                        <h4>${activity.title}</h4>
+                        <p style="color: var(--gray); font-size: 0.95rem;">${activity.description}</p>
+                        <div class="activity-time">${activity.time}</div>
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        // Initialize event listeners
+        function initEventListeners() {
+            // Profile picture upload
+            const avatarUpload = document.querySelector('.avatar-upload');
+            const fileInput = document.getElementById('profilePictureInput');
+            
+            avatarUpload.addEventListener('click', () => fileInput.click());
+            fileInput.addEventListener('change', handleProfilePictureUpload);
+            
+            // Style tag click events
+            document.querySelectorAll('.style-tag').forEach(tag => {
+                tag.addEventListener('click', function() {
+                    const style = this.textContent;
+                    filterByStyle(style);
+                });
+            });
+        }
+        
+        // Upload profile picture
+        function handleProfilePictureUpload(event) {
+            const file = event.target.files[0];
+            if (file && file.type.startsWith('image/')) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    // Update avatar image
+                    document.querySelector('.avatar-image').src = e.target.result;
+                    document.querySelector('.profile-img').src = e.target.result;
+                    
+                    // Show success notification
+                    showNotification('Profile picture updated successfully!', 'success');
+                    
+                    // In a real app, upload to backend
+                    console.log('Profile picture uploaded:', file.name);
+                };
+                reader.readAsDataURL(file);
+            } else {
+                showNotification('Please select a valid image file', 'error');
+            }
+        }
+        
+        // Edit personal info
+        function editPersonalInfo() {
+            // Populate modal with current data
+            document.getElementById('editName').value = profileData.name;
+            document.getElementById('editEmail').value = profileData.email;
+            document.getElementById('editLocation').value = profileData.location;
+            document.getElementById('editGoals').value = profileData.fashionGoals;
+            
+            // Show modal
+            document.getElementById('editPersonalModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        
+        // Edit style profile
+        function editStyleProfile() {
+            showNotification('Style profile editor coming soon!', 'info');
+            // This would open a modal to edit style preferences
+        }
+        
+        // Edit measurements
+        function editMeasurements() {
+            showNotification('Measurements editor coming soon!', 'info');
+            // This would open a modal to edit body measurements
+        }
+        
+        // Save personal info
+        function savePersonalInfo() {
+            // Get values from form
+            const newName = document.getElementById('editName').value.trim();
+            const newEmail = document.getElementById('editEmail').value.trim();
+            const newLocation = document.getElementById('editLocation').value.trim();
+            const newGoals = document.getElementById('editGoals').value.trim();
+            
+            // Update profile data
+            profileData.name = newName;
+            profileData.email = newEmail;
+            profileData.location = newLocation;
+            profileData.fashionGoals = newGoals;
+            
+            // Update display
+            loadProfileData();
+            
+            // Update navigation
+            document.querySelector('.profile-toggle span').textContent = newName.split(' ')[0];
+            
+            // Close modal
+            closeEditModal('editPersonalModal');
+            
+            // Show success
+            showNotification('Personal information updated successfully!', 'success');
+        }
+        
+        // Close edit modal
+        function closeEditModal(modalId) {
+            document.getElementById(modalId).classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+        
+        // View saved item
+        function viewSavedItem(itemId) {
+            showNotification(`Opening saved item ${itemId}...`, 'info');
+            // In a real app, this would open the item details
+            setTimeout(() => {
+                window.location.href = `inspiration.html#item-${itemId}`;
+            }, 500);
+        }
+        
+        // Remove saved item
+        function removeSavedItem(event, itemId) {
+            event.stopPropagation(); // Prevent triggering parent click
+            
+            if (confirm('Remove this item from your saved collection?')) {
+                // Remove from UI
+                const itemElement = event.target.closest('.saved-item');
+                itemElement.style.opacity = '0.5';
+                itemElement.style.pointerEvents = 'none';
+                
+                setTimeout(() => {
+                    itemElement.remove();
+                    
+                    // Update saved count
+                    profileData.stats.savedLooks--;
+                    document.getElementById('savedCount').textContent = profileData.stats.savedLooks;
+                    
+                    // Show notification
+                    showNotification('Item removed from saved collection', 'success');
+                    
+                    // Add activity
+                    addActivity('fas fa-trash', 'Removed saved item', 'From your collection', 'Just now');
+                }, 300);
+            }
+        }
+        
+        // Filter by style
+        function filterByStyle(style) {
+            showNotification(`Filtering by ${style} style...`, 'info');
+            setTimeout(() => {
+                window.location.href = `inspiration.html?style=${style.toLowerCase()}`;
+            }, 500);
+        }
+        
+        // Toggle notification setting
+        function toggleNotificationSetting() {
+            const checkbox = document.querySelector('.setting-item:nth-child(1) .toggle-checkbox');
+            checkbox.checked = !checkbox.checked;
+            
+            const status = checkbox.checked ? 'enabled' : 'disabled';
+            showNotification(`Push notifications ${status}`, 'success');
+        }
+        
+        // Toggle email setting
+        function toggleEmailSetting() {
+            const checkbox = document.querySelector('.setting-item:nth-child(2) .toggle-checkbox');
+            checkbox.checked = !checkbox.checked;
+            
+            const status = checkbox.checked ? 'enabled' : 'disabled';
+            showNotification(`Email updates ${status}`, 'success');
+        }
+        
+        // Toggle privacy setting
+        function togglePrivacySetting() {
+            const checkbox = document.querySelector('.setting-item:nth-child(3) .toggle-checkbox');
+            checkbox.checked = !checkbox.checked;
+            
+            const status = checkbox.checked ? 'enabled' : 'disabled';
+            showNotification(`Private profile ${status}`, 'success');
+        }
+        
+        // Export data
+        function exportData() {
+            showNotification('Preparing your data export...', 'info');
+            
+            setTimeout(() => {
+                // Create JSON data
+                const exportData = {
+                    profile: profileData,
+                    exportDate: new Date().toISOString(),
+                    version: '1.0'
+                };
+                
+                // Create download link
+                const dataStr = JSON.stringify(exportData, null, 2);
+                const dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
+                
+                const exportFileDefaultName = `vesta-export-${new Date().toISOString().split('T')[0]}.json`;
+                
+                const linkElement = document.createElement('a');
+                linkElement.setAttribute('href', dataUri);
+                linkElement.setAttribute('download', exportFileDefaultName);
+                linkElement.click();
+                
+                showNotification('Data export completed!', 'success');
+                
+                // Add activity
+                addActivity('fas fa-download', 'Exported data', 'Downloaded profile information', 'Just now');
+            }, 1500);
+        }
+        
+        // Add activity
+        function addActivity(icon, title, description, time) {
+            const activityList = document.getElementById('activityList');
+            const activityItem = document.createElement('div');
+            activityItem.className = 'activity-item';
+            activityItem.innerHTML = `
+                <div class="activity-icon">
+                    <i class="${icon}"></i>
+                </div>
+                <div class="activity-content">
+                    <h4>${title}</h4>
+                    <p style="color: var(--gray); font-size: 0.95rem;">${description}</p>
+                    <div class="activity-time">${time}</div>
+                </div>
+            `;
+            
+            // Add to top of list
+            activityList.insertBefore(activityItem, activityList.firstChild);
+            
+            // Limit to 5 items
+            if (activityList.children.length > 5) {
+                activityList.removeChild(activityList.lastChild);
+            }
+        }
+        
+        // Show notification
+        function showNotification(message, type = 'info') {
+            // Remove existing notification
+            const existing = document.querySelector('.notification');
+            if (existing) existing.remove();
+            
+            // Create notification
+            const notification = document.createElement('div');
+            notification.className = `notification notification-${type}`;
+            notification.innerHTML = `
+                <div class="notification-content">
+                    <i class="fas fa-${type === 'success' ? 'check-circle' : type === 'error' ? 'exclamation-circle' : 'info-circle'}"></i>
+                    <span>${message}</span>
+                </div>
+                <button class="notification-close" onclick="this.parentElement.remove()">
+                    <i class="fas fa-times"></i>
+                </button>
+            `;
+            
+            document.body.appendChild(notification);
+            
+            // Show
+            setTimeout(() => notification.classList.add('show'), 10);
+            
+            // Auto remove
+            setTimeout(() => {
+                notification.classList.remove('show');
+                setTimeout(() => notification.remove(), 300);
+            }, 3000);
+        }
+        
+        // Add CSS for notifications
+        const notificationStyles = document.createElement('style');
+        notificationStyles.textContent = `
+            .notification {
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: white;
+                padding: 16px 24px;
+                border-radius: 12px;
+                box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+                display: flex;
+                align-items: center;
+                gap: 12px;
+                z-index: 9999;
+                transform: translateX(150%);
+                transition: transform 0.3s ease;
+                max-width: 400px;
+            }
+            
+            .notification.show {
+                transform: translateX(0);
+            }
+            
+            .notification-success .notification-content i { color: #06D6A0; }
+            .notification-error .notification-content i { color: #EF476F; }
+            .notification-info .notification-content i { color: #118AB2; }
+            
+            .notification-content {
+                display: flex;
+                align-items: center;
+                gap: 12px;
+                font-weight: 500;
+            }
+            
+            .notification-close {
+                background: none;
+                border: none;
+                color: #6C757D;
+                cursor: pointer;
+                padding: 4px;
+            }
+        `;
+        document.head.appendChild(notificationStyles);
+    </script>
 </body>
 </html>

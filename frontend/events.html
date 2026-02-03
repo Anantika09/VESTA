@@ -1,0 +1,1560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Styling | VESTA - Perfect Looks for Every Occasion</title>
+    
+    <!-- Fonts & Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="https://img.icons8.com/color/96/000000/dress.png">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Events Specific CSS -->
+    <style>
+        /* Events Page Specific Styles */
+        .events-page {
+            padding: var(--space-xl) var(--space-md);
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .page-header-events {
+            text-align: center;
+            margin-bottom: var(--space-xl);
+        }
+        
+        /* Event Planner */
+        .event-planner {
+            background: linear-gradient(135deg, #6A11CB 0%, #2575FC 100%);
+            border-radius: var(--radius-xl);
+            padding: var(--space-2xl);
+            margin-bottom: var(--space-2xl);
+            color: white;
+        }
+        
+        .planner-header {
+            text-align: center;
+            margin-bottom: var(--space-xl);
+        }
+        
+        .planner-form {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--space-lg);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .form-group-events {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-sm);
+        }
+        
+        .form-group-events label {
+            font-weight: 600;
+            font-size: 0.95rem;
+            opacity: 0.9;
+        }
+        
+        .form-control-events {
+            padding: var(--space-md);
+            border-radius: var(--radius-md);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            transition: var(--transition-normal);
+        }
+        
+        .form-control-events:focus {
+            outline: none;
+            border-color: white;
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        .form-control-events option {
+            color: var(--dark);
+        }
+        
+        .btn-plan-event {
+            grid-column: 1 / -1;
+            justify-self: center;
+            background: white;
+            color: var(--primary);
+            padding: var(--space-md) var(--space-xl);
+            border-radius: var(--radius-md);
+            font-weight: 600;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            margin-top: var(--space-lg);
+        }
+        
+        .btn-plan-event:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        /* Upcoming Events */
+        .events-section {
+            margin-bottom: var(--space-2xl);
+        }
+        
+        .events-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--space-xl);
+        }
+        
+        .btn-add-event {
+            background: var(--primary);
+            color: white;
+            padding: var(--space-md) var(--space-xl);
+            border-radius: var(--radius-md);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+        }
+        
+        .btn-add-event:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+        
+        .events-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: var(--space-xl);
+        }
+        
+        .event-card {
+            background: white;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            transition: var(--transition-normal);
+        }
+        
+        .event-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .event-header {
+            padding: var(--space-lg);
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: white;
+            position: relative;
+        }
+        
+        .event-date {
+            font-size: 2.5rem;
+            font-weight: 700;
+            line-height: 1;
+            margin-bottom: 4px;
+        }
+        
+        .event-month {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+        
+        .event-type {
+            position: absolute;
+            top: var(--space-lg);
+            right: var(--space-lg);
+            background: rgba(255, 255, 255, 0.2);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            backdrop-filter: blur(10px);
+        }
+        
+        .event-content {
+            padding: var(--space-lg);
+        }
+        
+        .event-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: var(--space-sm);
+            color: var(--dark);
+        }
+        
+        .event-details {
+            display: grid;
+            gap: var(--space-sm);
+            margin-bottom: var(--space-lg);
+        }
+        
+        .detail-row {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            color: var(--gray);
+            font-size: 0.95rem;
+        }
+        
+        .detail-row i {
+            color: var(--primary);
+            width: 20px;
+        }
+        
+        .event-outfits {
+            margin-bottom: var(--space-lg);
+        }
+        
+        .outfits-title {
+            font-weight: 600;
+            margin-bottom: var(--space-sm);
+            color: var(--dark);
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+        }
+        
+        .outfits-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--space-sm);
+        }
+        
+        .outfit-preview {
+            height: 80px;
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            cursor: pointer;
+        }
+        
+        .outfit-preview img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        
+        .outfit-preview:hover img {
+            transform: scale(1.1);
+        }
+        
+        .event-actions {
+            display: flex;
+            gap: var(--space-sm);
+        }
+        
+        .btn-event-action {
+            flex: 1;
+            padding: var(--space-sm);
+            border-radius: var(--radius-md);
+            font-weight: 600;
+            text-align: center;
+            cursor: pointer;
+            border: none;
+        }
+        
+        .btn-view-outfits {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .btn-view-outfits:hover {
+            background: var(--primary-dark);
+        }
+        
+        .btn-edit-event {
+            background: var(--gray-light);
+            color: var(--dark);
+        }
+        
+        .btn-edit-event:hover {
+            background: var(--gray);
+            color: white;
+        }
+        
+        /* Past Events */
+        .past-events {
+            margin-bottom: var(--space-2xl);
+        }
+        
+        /* Event Categories */
+        .event-categories {
+            margin-bottom: var(--space-2xl);
+        }
+        
+        .categories-grid-events {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--space-lg);
+        }
+        
+        .category-card-events {
+            background: white;
+            padding: var(--space-xl);
+            border-radius: var(--radius-lg);
+            text-align: center;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition-normal);
+            cursor: pointer;
+        }
+        
+        .category-card-events:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .category-icon-events {
+            width: 70px;
+            height: 70px;
+            background: rgba(138, 43, 226, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto var(--space-md);
+            font-size: 1.8rem;
+            color: var(--primary);
+        }
+        
+        /* Empty State */
+        .events-empty {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: var(--space-2xl);
+            background: var(--gray-light);
+            border-radius: var(--radius-lg);
+        }
+        
+        .events-empty i {
+            font-size: 4rem;
+            color: var(--primary);
+            margin-bottom: var(--space-lg);
+        }
+        
+        /* Modal Styles */
+        .event-modal .modal-content {
+            max-width: 600px;
+        }
+        
+        .outfit-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--space-lg);
+            margin-top: var(--space-lg);
+        }
+        
+        .outfit-card {
+            background: white;
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .outfit-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .outfit-info {
+            padding: var(--space-md);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .events-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .planner-form {
+                grid-template-columns: 1fr;
+            }
+            
+            .outfits-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .event-actions {
+                flex-direction: column;
+            }
+            
+            .outfits-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loader">
+        <div class="loader-content">
+            <div class="loader-logo">
+                <i class="fas fa-star"></i>
+                <span>VESTA</span>
+            </div>
+            <div class="loader-spinner"></div>
+            <p>Loading event planner...</p>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <i class="fas fa-magic"></i>
+                <span>VESTA</span>
+            </a>
+            
+            <div class="nav-menu">
+                <a href="index.html" class="nav-link">
+                    <i class="fas fa-home"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="wardrobe.html" class="nav-link">
+                    <i class="fas fa-tshirt"></i>
+                    <span>My Wardrobe</span>
+                </a>
+                <a href="recommendations.html" class="nav-link">
+                    <i class="fas fa-lightbulb"></i>
+                    <span>Recommendations</span>
+                </a>
+                <a href="inspiration.html" class="nav-link">
+                    <i class="fas fa-images"></i>
+                    <span>Inspiration</span>
+                </a>
+                <a href="events.html" class="nav-link active">
+                    <i class="fas fa-calendar-star"></i>
+                    <span>Events</span>
+                </a>
+            </div>
+            
+            <div class="nav-profile">
+                <div class="profile-dropdown">
+                    <div class="profile-toggle">
+                        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&h=100" 
+                             alt="Profile" class="profile-img">
+                        <span>Anantika</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="dropdown-menu">
+                        <a href="profile.html" class="dropdown-item">
+                            <i class="fas fa-user"></i> My Profile
+                        </a>
+                        <a href="#" class="dropdown-item">
+                            <i class="fas fa-cog"></i> Settings
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a href="#" class="dropdown-item logout">
+                            <i class="fas fa-sign-out-alt"></i> Logout
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <button class="mobile-toggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="events-page">
+        <!-- Page Header -->
+        <div class="page-header-events">
+            <h1 class="hero-title">Event <span class="gradient-text">Styling</span></h1>
+            <p class="page-subtitle">Get perfect outfit recommendations for every occasion in your calendar</p>
+        </div>
+
+        <!-- Event Planner -->
+        <section class="event-planner">
+            <div class="planner-header">
+                <h2 style="color: white; margin-bottom: var(--space-sm);">Plan Your Event Look</h2>
+                <p style="opacity: 0.9;">Tell us about your event and get AI-powered styling recommendations</p>
+            </div>
+            
+            <div class="planner-form">
+                <div class="form-group-events">
+                    <label for="eventName">Event Name</label>
+                    <input type="text" id="eventName" class="form-control-events" placeholder="e.g., Friend's Wedding">
+                </div>
+                
+                <div class="form-group-events">
+                    <label for="eventType">Event Type</label>
+                    <select id="eventType" class="form-control-events">
+                        <option value="">Select Event Type</option>
+                        <option value="wedding">Wedding</option>
+                        <option value="party">Party/Night Out</option>
+                        <option value="interview">Job Interview</option>
+                        <option value="office">Office Event</option>
+                        <option value="date">Date Night</option>
+                        <option value="festival">Festival/Concert</option>
+                        <option value="formal">Formal Dinner</option>
+                        <option value="casual">Casual Gathering</option>
+                        <option value="sports">Sports Event</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                
+                <div class="form-group-events">
+                    <label for="eventDate">Event Date</label>
+                    <input type="date" id="eventDate" class="form-control-events">
+                </div>
+                
+                <div class="form-group-events">
+                    <label for="eventTime">Event Time</label>
+                    <select id="eventTime" class="form-control-events">
+                        <option value="">Select Time</option>
+                        <option value="morning">Morning</option>
+                        <option value="afternoon">Afternoon</option>
+                        <option value="evening">Evening</option>
+                        <option value="night">Night</option>
+                        <option value="all-day">All Day</option>
+                    </select>
+                </div>
+                
+                <div class="form-group-events">
+                    <label for="dressCode">Dress Code</label>
+                    <select id="dressCode" class="form-control-events">
+                        <option value="">Select Dress Code</option>
+                        <option value="casual">Casual</option>
+                        <option value="smart-casual">Smart Casual</option>
+                        <option value="business-casual">Business Casual</option>
+                        <option value="semi-formal">Semi-Formal</option>
+                        <option value="formal">Formal</option>
+                        <option value="black-tie">Black Tie</option>
+                        <option value="costume">Costume/Themed</option>
+                    </select>
+                </div>
+                
+                <div class="form-group-events">
+                    <label for="weather">Expected Weather</label>
+                    <select id="weather" class="form-control-events">
+                        <option value="">Select Weather</option>
+                        <option value="sunny">Sunny & Hot</option>
+                        <option value="warm">Warm</option>
+                        <option value="cool">Cool</option>
+                        <option value="cold">Cold</option>
+                        <option value="rainy">Rainy</option>
+                        <option value="snowy">Snowy</option>
+                        <option value="variable">Variable</option>
+                    </select>
+                </div>
+                
+                <div class="form-group-events">
+                    <label for="budget">Budget Range</label>
+                    <select id="budget" class="form-control-events">
+                        <option value="">Select Budget</option>
+                        <option value="low">Low (Use existing items)</option>
+                        <option value="medium">Medium (Mix existing & new)</option>
+                        <option value="high">High (Get new items)</option>
+                        <option value="luxury">Luxury (High-end options)</option>
+                    </select>
+                </div>
+                
+                <div class="form-group-events">
+                    <label for="stylePreference">Style Preference</label>
+                    <select id="stylePreference" class="form-control-events">
+                        <option value="">Select Style</option>
+                        <option value="classic">Classic</option>
+                        <option value="modern">Modern</option>
+                        <option value="bohemian">Bohemian</option>
+                        <option value="edgy">Edgy</option>
+                        <option value="minimalist">Minimalist</option>
+                        <option value="romantic">Romantic</option>
+                        <option value="sporty">Sporty</option>
+                        <option value="vintage">Vintage</option>
+                    </select>
+                </div>
+                
+                <button class="btn-plan-event" id="planEventBtn">
+                    <i class="fas fa-robot"></i>
+                    <span>Plan My Event Look</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- Upcoming Events -->
+        <section class="events-section">
+            <div class="events-header">
+                <h2 class="section-title">Upcoming <span>Events</span></h2>
+                <button class="btn-add-event" onclick="openAddEventModal()">
+                    <i class="fas fa-plus"></i>
+                    <span>Add New Event</span>
+                </button>
+            </div>
+            
+            <div class="events-grid" id="eventsGrid">
+                <!-- Events will be loaded via JavaScript -->
+                <div class="events-empty">
+                    <i class="fas fa-calendar-plus"></i>
+                    <h3>No Upcoming Events</h3>
+                    <p>Plan your first event look using the event planner above</p>
+                    <button class="btn-primary" onclick="scrollToPlanner()" style="margin-top: var(--space-md);">
+                        <i class="fas fa-calendar-alt"></i> Plan First Event
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Event Categories -->
+        <section class="event-categories">
+            <h2 class="section-title">Event <span>Categories</span></h2>
+            <p class="section-subtitle">Get specialized styling for different occasions</p>
+            
+            <div class="categories-grid-events">
+                <div class="category-card-events" onclick="planEventByCategory('wedding')">
+                    <div class="category-icon-events">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <h3>Weddings</h3>
+                    <p>Perfect looks for brides, guests, and wedding parties</p>
+                </div>
+                
+                <div class="category-card-events" onclick="planEventByCategory('party')">
+                    <div class="category-icon-events">
+                        <i class="fas fa-glass-cheers"></i>
+                    </div>
+                    <h3>Parties</h3>
+                    <p>Night out, celebrations, and social gatherings</p>
+                </div>
+                
+                <div class="category-card-events" onclick="planEventByCategory('interview')">
+                    <div class="category-icon-events">
+                        <i class="fas fa-briefcase"></i>
+                    </div>
+                    <h3>Interviews</h3>
+                    <p>Professional attire for job interviews</p>
+                </div>
+                
+                <div class="category-card-events" onclick="planEventByCategory('office')">
+                    <div class="category-icon-events">
+                        <i class="fas fa-building"></i>
+                    </div>
+                    <h3>Office Events</h3>
+                    <p>Corporate parties and work functions</p>
+                </div>
+                
+                <div class="category-card-events" onclick="planEventByCategory('date')">
+                    <div class="category-icon-events">
+                        <i class="fas fa-heartbeat"></i>
+                    </div>
+                    <h3>Date Nights</h3>
+                    <p>Romantic outfits for special evenings</p>
+                </div>
+                
+                <div class="category-card-events" onclick="planEventByCategory('festival')">
+                    <div class="category-icon-events">
+                        <i class="fas fa-music"></i>
+                    </div>
+                    <h3>Festivals</h3>
+                    <p>Concert and festival fashion</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Past Events -->
+        <section class="past-events">
+            <h2 class="section-title">Past <span>Events</span></h2>
+            <p class="section-subtitle">Review your previous event looks</p>
+            
+            <div class="events-grid" id="pastEventsGrid">
+                <!-- Past events will be loaded via JavaScript -->
+            </div>
+        </section>
+
+        <!-- Event Tips -->
+        <section class="features-section">
+            <h2 class="section-title">Event Styling <span>Tips</span></h2>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon upload">
+                        <i class="fas fa-calendar-check"></i>
+                    </div>
+                    <h3>Plan Ahead</h3>
+                    <p>Create your event in advance to get time for shopping and preparation.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon analyze">
+                        <i class="fas fa-tshirt"></i>
+                    </div>
+                    <h3>Wardrobe First</h3>
+                    <p>Check your existing wardrobe before buying new items for events.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon recommend">
+                        <i class="fas fa-cloud-sun"></i>
+                    </div>
+                    <h3>Weather Ready</h3>
+                    <p>Always check weather forecasts and plan backup options.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon inspire">
+                        <i class="fas fa-shoe-prints"></i>
+                    </div>
+                    <h3>Comfort Matters</h3>
+                    <p>Choose comfortable shoes and fabrics for longer events.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Add Event Modal -->
+    <div class="modal event-modal" id="addEventModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Add New Event</h3>
+                <button class="modal-close" onclick="closeAddEventModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="planner-form" style="background: none; padding: 0;">
+                    <div class="form-group-events" style="color: var(--dark);">
+                        <label for="modalEventName" style="color: var(--dark);">Event Name</label>
+                        <input type="text" id="modalEventName" class="form-control-events" style="color: var(--dark); background: white; border-color: var(--gray-light);">
+                    </div>
+                    
+                    <div class="form-group-events" style="color: var(--dark);">
+                        <label for="modalEventType" style="color: var(--dark);">Event Type</label>
+                        <select id="modalEventType" class="form-control-events" style="color: var(--dark); background: white; border-color: var(--gray-light);">
+                            <option value="">Select Event Type</option>
+                            <option value="wedding">Wedding</option>
+                            <option value="party">Party/Night Out</option>
+                            <option value="interview">Job Interview</option>
+                            <option value="office">Office Event</option>
+                            <option value="date">Date Night</option>
+                            <option value="festival">Festival/Concert</option>
+                            <option value="formal">Formal Dinner</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group-events" style="color: var(--dark);">
+                        <label for="modalEventDate" style="color: var(--dark);">Event Date</label>
+                        <input type="date" id="modalEventDate" class="form-control-events" style="color: var(--dark); background: white; border-color: var(--gray-light);">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-secondary" onclick="closeAddEventModal()">Cancel</button>
+                <button class="btn-primary" onclick="saveNewEvent()">Add Event</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <div class="footer-logo">
+                    <i class="fas fa-magic"></i>
+                    <span>VESTA</span>
+                </div>
+                <p class="footer-description">
+                    AI-powered personal styling platform that brings fashion to life through visual intelligence.
+                </p>
+                <div class="footer-social">
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-pinterest"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-github"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Platform</h4>
+                <ul class="footer-links">
+                    <li><a href="index.html">Dashboard</a></li>
+                    <li><a href="wardrobe.html">Digital Wardrobe</a></li>
+                    <li><a href="recommendations.html">AI Recommendations</a></li>
+                    <li><a href="inspiration.html">Style Inspiration</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Features</h4>
+                <ul class="footer-links">
+                    <li><a href="#">Event-Based Styling</a></li>
+                    <li><a href="#">Weather-Aware Outfits</a></li>
+                    <li><a href="#">Budget Planning</a></li>
+                    <li><a href="#">Seasonal Recommendations</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Connect</h4>
+                <ul class="footer-links">
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                    <li><a href="#">Developer API</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2024 VESTA | BTech CS Project | Created with <i class="fas fa-heart"></i> for showcasing full-stack skills</p>
+            <p class="tech-stack">
+                <span>Tech Stack:</span>
+                <span class="tech-tag">MongoDB</span>
+                <span class="tech-tag">Express.js</span>
+                <span class="tech-tag">React</span>
+                <span class="tech-tag">Node.js</span>
+                <span class="tech-tag">TensorFlow.js</span>
+            </p>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+    
+    <!-- Events Page Specific JavaScript -->
+    <script>
+        // Initialize events page
+        document.addEventListener('DOMContentLoaded', function() {
+            loadEvents();
+            initEventPlanner();
+            initEventListeners();
+        });
+        
+        // Sample events data
+        const sampleEvents = [
+            {
+                id: 1,
+                name: "Friend's Wedding",
+                type: "wedding",
+                date: "2024-03-15",
+                time: "afternoon",
+                dressCode: "semi-formal",
+                weather: "warm",
+                budget: "medium",
+                style: "romantic",
+                status: "upcoming",
+                outfits: [
+                    {
+                        id: 1,
+                        name: "Floral Midi Dress",
+                        image: "https://images.unsplash.com/photo-1566977744263-79e677bb4c57?auto=format&fit=crop&w=400",
+                        confidence: 92,
+                        items: ["Dress", "Wedges", "Clutch", "Pearl Earrings"]
+                    },
+                    {
+                        id: 2,
+                        name: "Pastel Suit Set",
+                        image: "https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=400",
+                        confidence: 88,
+                        items: ["Blazer", "Pants", "Heels", "Statement Necklace"]
+                    }
+                ]
+            },
+            {
+                id: 2,
+                name: "Job Interview",
+                type: "interview",
+                date: "2024-03-10",
+                time: "morning",
+                dressCode: "business-casual",
+                weather: "cool",
+                budget: "low",
+                style: "classic",
+                status: "upcoming",
+                outfits: [
+                    {
+                        id: 1,
+                        name: "Professional Blazer Set",
+                        image: "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=400",
+                        confidence: 95,
+                        items: ["Blazer", "White Blouse", "Trousers", "Loafers"]
+                    }
+                ]
+            },
+            {
+                id: 3,
+                name: "Birthday Party",
+                type: "party",
+                date: "2024-02-20",
+                time: "night",
+                dressCode: "smart-casual",
+                weather: "cool",
+                budget: "medium",
+                style: "modern",
+                status: "past",
+                outfits: [
+                    {
+                        id: 1,
+                        name: "Sequin Mini Dress",
+                        image: "https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?auto=format&fit=crop&w=400",
+                        confidence: 90,
+                        items: ["Dress", "Heels", "Clutch", "Bold Earrings"]
+                    }
+                ]
+            }
+        ];
+        
+        let events = [...sampleEvents];
+        
+        // Load events
+        function loadEvents() {
+            const upcomingGrid = document.getElementById('eventsGrid');
+            const pastGrid = document.getElementById('pastEventsGrid');
+            
+            const upcomingEvents = events.filter(event => event.status === 'upcoming');
+            const pastEvents = events.filter(event => event.status === 'past');
+            
+            renderEvents(upcomingEvents, upcomingGrid, 'upcoming');
+            renderEvents(pastEvents, pastGrid, 'past');
+        }
+        
+        // Render events
+        function renderEvents(eventList, container, type) {
+            if (eventList.length === 0) {
+                if (type === 'upcoming') {
+                    container.innerHTML = `
+                        <div class="events-empty">
+                            <i class="fas fa-calendar-plus"></i>
+                            <h3>No ${type === 'upcoming' ? 'Upcoming' : 'Past'} Events</h3>
+                            <p>${type === 'upcoming' ? 'Plan your first event using the event planner' : 'No past events recorded yet'}</p>
+                            ${type === 'upcoming' ? `
+                                <button class="btn-primary" onclick="scrollToPlanner()" style="margin-top: var(--space-md);">
+                                    <i class="fas fa-calendar-alt"></i> Plan First Event
+                                </button>
+                            ` : ''}
+                        </div>
+                    `;
+                }
+                return;
+            }
+            
+            container.innerHTML = eventList.map(event => `
+                <div class="event-card" data-id="${event.id}" data-type="${event.type}">
+                    <div class="event-header">
+                        <div class="event-date">${new Date(event.date).getDate()}</div>
+                        <div class="event-month">${new Date(event.date).toLocaleDateString('en-US', { month: 'short' })}</div>
+                        <span class="event-type">${getEventTypeLabel(event.type)}</span>
+                    </div>
+                    
+                    <div class="event-content">
+                        <h3 class="event-title">${event.name}</h3>
+                        
+                        <div class="event-details">
+                            <div class="detail-row">
+                                <i class="far fa-clock"></i>
+                                <span>${getTimeLabel(event.time)} • ${event.dressCode.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')}</span>
+                            </div>
+                            <div class="detail-row">
+                                <i class="fas fa-cloud"></i>
+                                <span>${getWeatherLabel(event.weather)} • ${event.budget.charAt(0).toUpperCase() + event.budget.slice(1)} Budget</span>
+                            </div>
+                            <div class="detail-row">
+                                <i class="fas fa-palette"></i>
+                                <span>${event.style.charAt(0).toUpperCase() + event.style.slice(1)} Style</span>
+                            </div>
+                        </div>
+                        
+                        ${event.outfits && event.outfits.length > 0 ? `
+                            <div class="event-outfits">
+                                <div class="outfits-title">
+                                    <i class="fas fa-lightbulb"></i>
+                                    <span>AI Recommendations (${event.outfits.length})</span>
+                                </div>
+                                <div class="outfits-grid">
+                                    ${event.outfits.map(outfit => `
+                                        <div class="outfit-preview" onclick="viewOutfitDetails(${event.id}, ${outfit.id})" 
+                                             title="${outfit.name} - ${outfit.confidence}% match">
+                                            <img src="${outfit.image}" alt="${outfit.name}">
+                                        </div>
+                                    `).join('')}
+                                </div>
+                            </div>
+                        ` : ''}
+                        
+                        <div class="event-actions">
+                            <button class="btn-event-action btn-view-outfits" onclick="getEventRecommendations(${event.id})">
+                                <i class="fas fa-lightbulb"></i> Get Outfits
+                            </button>
+                            <button class="btn-event-action btn-edit-event" onclick="editEvent(${event.id})">
+                                <i class="fas fa-edit"></i> Edit
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        // Initialize event planner
+        function initEventPlanner() {
+            // Set minimum date to today
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('eventDate').min = today;
+            
+            // Plan event button
+            const planBtn = document.getElementById('planEventBtn');
+            planBtn.addEventListener('click', planEventLook);
+        }
+        
+        // Initialize event listeners
+        function initEventListeners() {
+            // Event type quick select
+            document.querySelectorAll('.category-card-events').forEach(card => {
+                card.addEventListener('click', function() {
+                    const type = this.getAttribute('onclick').match(/'([^']+)'/)[1];
+                    planEventByCategory(type);
+                });
+            });
+        }
+        
+        // Plan event by category
+        function planEventByCategory(category) {
+            // Set event type
+            document.getElementById('eventType').value = category;
+            
+            // Scroll to planner
+            document.querySelector('.event-planner').scrollIntoView({ behavior: 'smooth' });
+            
+            // Show notification
+            showNotification(`Planning ${getEventTypeLabel(category)} event look`, 'info');
+        }
+        
+        // Plan event look
+        function planEventLook() {
+            const eventName = document.getElementById('eventName').value.trim();
+            const eventType = document.getElementById('eventType').value;
+            const eventDate = document.getElementById('eventDate').value;
+            const eventTime = document.getElementById('eventTime').value;
+            const dressCode = document.getElementById('dressCode').value;
+            const weather = document.getElementById('weather').value;
+            const budget = document.getElementById('budget').value;
+            const style = document.getElementById('stylePreference').value;
+            
+            // Validation
+            if (!eventName) {
+                showNotification('Please enter event name', 'error');
+                return;
+            }
+            
+            if (!eventType) {
+                showNotification('Please select event type', 'error');
+                return;
+            }
+            
+            if (!eventDate) {
+                showNotification('Please select event date', 'error');
+                return;
+            }
+            
+            if (!eventTime) {
+                showNotification('Please select event time', 'error');
+                return;
+            }
+            
+            if (!dressCode) {
+                showNotification('Please select dress code', 'error');
+                return;
+            }
+            
+            // Show loading
+            const planBtn = document.getElementById('planEventBtn');
+            const originalText = planBtn.innerHTML;
+            planBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Planning...';
+            planBtn.disabled = true;
+            
+            // Simulate AI planning
+            setTimeout(() => {
+                // Create new event
+                const newEvent = {
+                    id: Date.now(),
+                    name: eventName,
+                    type: eventType,
+                    date: eventDate,
+                    time: eventTime,
+                    dressCode: dressCode,
+                    weather: weather || 'warm',
+                    budget: budget || 'medium',
+                    style: style || 'modern',
+                    status: 'upcoming',
+                    outfits: generateOutfitsForEvent(eventType, dressCode, budget, style)
+                };
+                
+                // Add to events
+                events.unshift(newEvent);
+                
+                // Update display
+                loadEvents();
+                
+                // Reset form
+                document.getElementById('eventName').value = '';
+                document.getElementById('eventType').value = '';
+                document.getElementById('eventDate').value = '';
+                document.getElementById('eventTime').value = '';
+                document.getElementById('dressCode').value = '';
+                document.getElementById('weather').value = '';
+                document.getElementById('budget').value = '';
+                document.getElementById('stylePreference').value = '';
+                
+                // Reset button
+                planBtn.innerHTML = originalText;
+                planBtn.disabled = false;
+                
+                // Show success
+                showNotification(`Event "${eventName}" planned successfully!`, 'success');
+                
+                // Scroll to new event
+                setTimeout(() => {
+                    document.querySelector('.events-section').scrollIntoView({ behavior: 'smooth' });
+                }, 500);
+                
+            }, 2000);
+        }
+        
+        // Generate outfits for event
+        function generateOutfitsForEvent(type, dressCode, budget, style) {
+            const outfits = [];
+            
+            // Generate 1-3 outfits based on event type
+            const outfitCount = type === 'wedding' || type === 'formal' ? 3 : 2;
+            
+            for (let i = 0; i < outfitCount; i++) {
+                outfits.push({
+                    id: i + 1,
+                    name: getOutfitName(type, dressCode, style, i),
+                    image: getOutfitImage(type, style, i),
+                    confidence: Math.floor(Math.random() * 15) + 80, // 80-95%
+                    items: getOutfitItems(type, dressCode, i)
+                });
+            }
+            
+            return outfits;
+        }
+        
+        // Get event recommendations
+        function getEventRecommendations(eventId) {
+            const event = events.find(e => e.id === eventId);
+            if (event) {
+                showNotification(`Finding outfits for "${event.name}"...`, 'info');
+                
+                // Simulate AI processing
+                setTimeout(() => {
+                    // Create modal with outfit details
+                    const modal = document.createElement('div');
+                    modal.className = 'modal active event-modal';
+                    modal.innerHTML = `
+                        <div class="modal-content" style="max-width: 900px;">
+                            <div class="modal-header">
+                                <h3>Outfit Recommendations for ${event.name}</h3>
+                                <button class="modal-close" onclick="this.parentElement.parentElement.remove()">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div style="margin-bottom: var(--space-lg);">
+                                    <p><strong>Event Details:</strong> ${getEventTypeLabel(event.type)} • ${getTimeLabel(event.time)} • ${event.dressCode.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')}</p>
+                                </div>
+                                
+                                <div class="outfit-details">
+                                    ${event.outfits.map(outfit => `
+                                        <div class="outfit-card">
+                                            <img src="${outfit.image}" alt="${outfit.name}">
+                                            <div class="outfit-info">
+                                                <h4>${outfit.name}</h4>
+                                                <div style="background: ${getConfidenceColor(outfit.confidence)}; color: white; padding: 4px 12px; border-radius: 20px; display: inline-block; margin: var(--space-sm) 0; font-size: 0.85rem;">
+                                                    ${outfit.confidence}% Match
+                                                </div>
+                                                <div style="font-size: 0.9rem; color: var(--gray); margin-top: var(--space-sm);">
+                                                    <strong>Includes:</strong><br>
+                                                    ${outfit.items.join(', ')}
+                                                </div>
+                                                <button class="btn-primary" onclick="saveOutfitToWardrobe(${eventId}, ${outfit.id})" 
+                                                        style="width: 100%; margin-top: var(--space-sm); padding: var(--space-sm);">
+                                                    <i class="fas fa-save"></i> Save to Wardrobe
+                                                </button>
+                                            </div>
+                                        </div>
+                                    `).join('')}
+                                </div>
+                                
+                                <div style="margin-top: var(--space-xl); padding: var(--space-md); background: var(--gray-light); border-radius: var(--radius-md);">
+                                    <h4 style="margin-bottom: var(--space-sm);">AI Styling Notes</h4>
+                                    <p>These outfits were generated based on the event type (${event.type}), dress code (${event.dressCode}), and your style preference (${event.style}). The AI considered weather conditions (${event.weather}) and your budget range (${event.budget}).</p>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    
+                    document.body.appendChild(modal);
+                    document.body.style.overflow = 'hidden';
+                    
+                    // Close modal on background click
+                    modal.addEventListener('click', function(e) {
+                        if (e.target === this) {
+                            this.remove();
+                            document.body.style.overflow = 'auto';
+                        }
+                    });
+                    
+                }, 1000);
+            }
+        }
+        
+        // View outfit details
+        function viewOutfitDetails(eventId, outfitId) {
+            const event = events.find(e => e.id === eventId);
+            if (event && event.outfits) {
+                const outfit = event.outfits.find(o => o.id === outfitId);
+                if (outfit) {
+                    const modal = document.createElement('div');
+                    modal.className = 'modal active';
+                    modal.innerHTML = `
+                        <div class="modal-content" style="max-width: 600px;">
+                            <div class="modal-header">
+                                <h3>${outfit.name}</h3>
+                                <button class="modal-close" onclick="this.parentElement.parentElement.remove()">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <img src="${outfit.image}" alt="${outfit.name}" style="width: 100%; border-radius: var(--radius-lg); margin-bottom: var(--space-lg);">
+                                
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-lg);">
+                                    <div style="background: ${getConfidenceColor(outfit.confidence)}; color: white; padding: var(--space-sm) var(--space-md); border-radius: var(--radius-md);">
+                                        ${outfit.confidence}% Match with Your Style
+                                    </div>
+                                    <button class="btn-primary" onclick="saveOutfitToWardrobe(${eventId}, ${outfitId}); this.parentElement.parentElement.parentElement.parentElement.remove()">
+                                        <i class="fas fa-save"></i> Save Outfit
+                                    </button>
+                                </div>
+                                
+                                <div style="margin-bottom: var(--space-lg);">
+                                    <h4 style="margin-bottom: var(--space-sm);">Items Included</h4>
+                                    <ul style="margin-left: var(--space-lg);">
+                                        ${outfit.items.map(item => `<li>${item}</li>`).join('')}
+                                    </ul>
+                                </div>
+                                
+                                <div style="padding: var(--space-md); background: var(--gray-light); border-radius: var(--radius-md);">
+                                    <h4 style="margin-bottom: var(--space-sm);">Why This Works</h4>
+                                    <p>This outfit is perfect for ${event.name} because it matches the ${event.dressCode} dress code and ${event.style} style preference. The colors and pieces work well for ${event.time} events during ${event.weather} weather conditions.</p>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    
+                    document.body.appendChild(modal);
+                    document.body.style.overflow = 'hidden';
+                    
+                    modal.addEventListener('click', function(e) {
+                        if (e.target === this) {
+                            this.remove();
+                            document.body.style.overflow = 'auto';
+                        }
+                    });
+                }
+            }
+        }
+        
+        // Save outfit to wardrobe
+        function saveOutfitToWardrobe(eventId, outfitId) {
+            const event = events.find(e => e.id === eventId);
+            if (event && event.outfits) {
+                const outfit = event.outfits.find(o => o.id === outfitId);
+                if (outfit) {
+                    showNotification(`"${outfit.name}" saved to your wardrobe!`, 'success');
+                    // In a real app, this would save to the backend
+                    console.log('Outfit saved:', outfit);
+                }
+            }
+        }
+        
+        // Edit event
+        function editEvent(eventId) {
+            const event = events.find(e => e.id === eventId);
+            if (event) {
+                // Populate modal
+                document.getElementById('modalEventName').value = event.name;
+                document.getElementById('modalEventType').value = event.type;
+                document.getElementById('modalEventDate').value = event.date;
+                
+                // Show modal
+                document.getElementById('addEventModal').classList.add('active');
+                document.body.style.overflow = 'hidden';
+                
+                // Store event ID for saving
+                document.getElementById('addEventModal').dataset.editingId = eventId;
+            }
+        }
+        
+        // Open add event modal
+        function openAddEventModal() {
+            // Clear modal
+            document.getElementById('modalEventName').value = '';
+            document.getElementById('modalEventType').value = '';
+            document.getElementById('modalEventDate').value = '';
+            delete document.getElementById('addEventModal').dataset.editingId;
+            
+            // Show modal
+            document.getElementById('addEventModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        
+        // Close add event modal
+        function closeAddEventModal() {
+            document.getElementById('addEventModal').classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+        
+        // Save new event
+        function saveNewEvent() {
+            const name = document.getElementById('modalEventName').value.trim();
+            const type = document.getElementById('modalEventType').value;
+            const date = document.getElementById('modalEventDate').value;
+            const editingId = document.getElementById('addEventModal').dataset.editingId;
+            
+            if (!name || !type || !date) {
+                showNotification('Please fill all fields', 'error');
+                return;
+            }
+            
+            if (editingId) {
+                // Update existing event
+                const eventIndex = events.findIndex(e => e.id === parseInt(editingId));
+                if (eventIndex !== -1) {
+                    events[eventIndex].name = name;
+                    events[eventIndex].type = type;
+                    events[eventIndex].date = date;
+                    showNotification('Event updated successfully!', 'success');
+                }
+            } else {
+                // Create new event
+                const newEvent = {
+                    id: Date.now(),
+                    name: name,
+                    type: type,
+                    date: date,
+                    time: 'evening',
+                    dressCode: 'smart-casual',
+                    weather: 'warm',
+                    budget: 'medium',
+                    style: 'modern',
+                    status: 'upcoming',
+                    outfits: []
+                };
+                
+                events.unshift(newEvent);
+                showNotification('Event added successfully!', 'success');
+            }
+            
+            // Update display
+            loadEvents();
+            
+            // Close modal
+            closeAddEventModal();
+        }
+        
+        // Scroll to planner
+        function scrollToPlanner() {
+            document.querySelector('.event-planner').scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        // Helper functions
+        function getEventTypeLabel(type) {
+            const labels = {
+                'wedding': 'Wedding',
+                'party': 'Party',
+                'interview': 'Interview',
+                'office': 'Office',
+                'date': 'Date',
+                'festival': 'Festival',
+                'formal': 'Formal',
+                'casual': 'Casual',
+                'sports': 'Sports',
+                'other': 'Other'
+            };
+            return labels[type] || type;
+        }
+        
+        function getTimeLabel(time) {
+            const labels = {
+                'morning': 'Morning',
+                'afternoon': 'Afternoon',
+                'evening': 'Evening',
+                'night': 'Night',
+                'all-day': 'All Day'
+            };
+            return labels[time] || time;
+        }
+        
+        function getWeatherLabel(weather) {
+            const labels = {
+                'sunny': 'Sunny',
+                'warm': 'Warm',
+                'cool': 'Cool',
+                'cold': 'Cold',
+                'rainy': 'Rainy',
+                'snowy': 'Snowy',
+                'variable': 'Variable'
+            };
+            return labels[weather] || weather;
+        }
+        
+        function getOutfitName(type, dressCode, style, index) {
+            const prefixes = {
+                'wedding': ['Elegant Wedding Guest', 'Sophisticated Bridal Party', 'Chic Ceremony'],
+                'party': ['Night Out Glam', 'Party Perfect', 'Celebration Ready'],
+                'interview': ['Professional Interview', 'Confident Candidate', 'Corporate Ready'],
+                'office': ['Office Chic', 'Business Professional', 'Work Function']
+            };
+            
+            const prefix = prefixes[type] ? prefixes[type][index % prefixes[type].length] : 'Stylish Outfit';
+            const styleText = style ? ` • ${style.charAt(0).toUpperCase() + style.slice(1)}` : '';
+            return `${prefix}${styleText}`;
+        }
+        
+        function getOutfitImage(type, style, index) {
+            const images = {
+                'wedding': [
+                    'https://images.unsplash.com/photo-1566977744263-79e677bb4c57?auto=format&fit=crop&w=400',
+                    'https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=400'
+                ],
+                'party': [
+                    'https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?auto=format&fit=crop&w=400',
+                    'https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=400'
+                ],
+                'interview': [
+                    'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=400'
+                ],
+                'office': [
+                    'https://images.unsplash.com/photo-1525507119028-ed4c629a60a3?auto=format&fit=crop&w=400'
+                ]
+            };
+            
+            const arr = images[type] || images.wedding;
+            return arr[index % arr.length];
+        }
+        
+        function getOutfitItems(type, dressCode, index) {
+            const items = {
+                'wedding': [
+                    ['Midi Dress', 'Wedges', 'Clutch', 'Pearl Earrings'],
+                    ['Jumpsuit', 'Heels', 'Evening Bag', 'Statement Necklace'],
+                    ['Cocktail Dress', 'Strappy Sandals', 'Minimal Jewelry']
+                ],
+                'party': [
+                    ['Sequin Top', 'Black Pants', 'Heels', 'Bold Earrings'],
+                    ['Bodycon Dress', 'Ankle Boots', 'Crossbody Bag']
+                ],
+                'interview': [
+                    ['Blazer', 'White Blouse', 'Trousers', 'Loafers', 'Briefcase']
+                ]
+            };
+            
+            const arr = items[type] || items.wedding;
+            return arr[index % arr.length];
+        }
+        
+        function getConfidenceColor(confidence) {
+            if (confidence >= 90) return '#06D6A0';
+            if (confidence >= 80) return '#FFD166';
+            return '#EF476F';
+        }
+        
+        // Show notification
+        function showNotification(message, type = 'info') {
+            // Remove existing notification
+            const existing = document.querySelector('.notification');
+            if (existing) existing.remove();
+            
+            // Create notification
+            const notification = document.createElement('div');
+            notification.className = `notification notification-${type}`;
+            notification.innerHTML = `
+                <div class="notification-content">
+                    <i class="fas fa-${type === 'success' ? 'check-circle' : type === 'error' ? 'exclamation-circle' : 'info-circle'}"></i>
+                    <span>${message}</span>
+                </div>
+                <button class="notification-close" onclick="this.parentElement.remove()">
+                    <i class="fas fa-times"></i>
+                </button>
+            `;
+            
+            document.body.appendChild(notification);
+            
+            // Show
+            setTimeout(() => notification.classList.add('show'), 10);
+            
+            // Auto remove
+            setTimeout(() => {
+                notification.classList.remove('show');
+                setTimeout(() => notification.remove(), 300);
+            }, 3000);
+        }
+        
+        // Add CSS for notifications
+        const notificationStyles = document.createElement('style');
+        notificationStyles.textContent = `
+            .notification {
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: white;
+                padding: 16px 24px;
+                border-radius: 12px;
+                box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+                display: flex;
+                align-items: center;
+                gap: 12px;
+                z-index: 9999;
+                transform: translateX(150%);
+                transition: transform 0.3s ease;
+                max-width: 400px;
+            }
+            
+            .notification.show {
+                transform: translateX(0);
+            }
+            
+            .notification-success .notification-content i { color: #06D6A0; }
+            .notification-error .notification-content i { color: #EF476F; }
+            .notification-info .notification-content i { color: #118AB2; }
+            
+            .notification-content {
+                display: flex;
+                align-items: center;
+                gap: 12px;
+                font-weight: 500;
+            }
+            
+            .notification-close {
+                background: none;
+                border: none;
+                color: #6C757D;
+                cursor: pointer;
+                padding: 4px;
+            }
+            
+            .fa-spin {
+                animation: spin 1s linear infinite;
+            }
+            
+            @keyframes spin {
+                to { transform: rotate(360deg); }
+            }
+        `;
+        document.head.appendChild(notificationStyles);
+    </script>
+</body>
+</html>
